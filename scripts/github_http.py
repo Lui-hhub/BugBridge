@@ -94,7 +94,7 @@ class GitHubClient:
         for redirect in range(6):
             headers = {'Authorization':'Bearer '+self.credential.token,
                        'Accept':accept, 'X-GitHub-Api-Version':API_VERSION,
-                       'User-Agent':'issue-materials-review/1.0'}
+                       'User-Agent':'BugBridge/1.0'}
             if cached and url==original:
                 if cached.get('etag'):
                     headers['If-None-Match']=cached['etag']

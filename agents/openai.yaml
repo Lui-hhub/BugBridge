@@ -1,4 +1,4 @@
 interface:
-  display_name: "Issue Materials Review"
+  display_name: "BugBridge"
   short_description: "Prepare issue drafts with cached forms and saved copy progress"
-  default_prompt: "Use $issue-materials-to-html with the materials path and library name to prepare official-field drafts in a local review service. Reuse cached templates and existing reproduction environments; fill the generated value-only answers, review and compile them without changing the fixed frontend."
+  default_prompt: "Use $bugbridge with the materials path and library name to prepare official-field drafts in a local review service. Reuse cached templates and existing reproduction environments; fill the generated value-only answers, review and compile them without changing the fixed frontend."

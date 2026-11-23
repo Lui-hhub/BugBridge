@@ -1,56 +1,75 @@
-# Issue Materials Review
+# BugBridge
 
-把这个项目克隆到一个新目录，在 agent 中打开该目录，然后提供两项输入：
-**材料路径**和**目标库名称**。Agent 读取项目的 AGENTS.md，使用项目自带的工具
-整理证据、复现、检索已有 issue/PR，最后启动供人工审阅和逐字段复制的页面。
+**Bridge local reproductions and upstream conversations.**
+
+English · [简体中文](README.zh-CN.md)
+
+BugBridge is an agent workspace for turning bug materials into traceable,
+official-template issue drafts. Clone it, open the checkout in your agent, and
+provide a **materials path** and a **target library/project name**.
+
+Your agent investigates the evidence, reproduces claims in existing environments,
+compares official issues and PRs, and prepares a local review page. You review the
+drafts and copy each field into the official form yourself.
+
+## Start with a checkout
 
 ```bash
-git clone <仓库地址或本地源仓库路径> <新的工作区目录>
-cd <新的工作区目录>
+git clone https://github.com/Lui-hhub/BugBridge.git
+cd BugBridge
 ```
 
-打开这个工作区后，可以这样提出任务：
+Open that directory in your coding agent and ask:
 
-> 材料在 /path/to/materials，目标库是 pytorch。请按本工作区的 AGENTS.md
-> 整理 issue 材料，完成复现和已有 issue/PR 核对，提供人工审阅页面。
+> My materials are at /path/to/materials, and the target library is pytorch.
+> Follow this workspace's AGENTS.md, prepare the issue materials, reproduce the
+> claims, compare existing issues/PRs, and give me the local review page.
 
-不需要把项目安装到全局 skill 目录。保留的 SKILL.md 是项目内的完整流程说明，
-由 AGENTS.md 引导读取；具体操作使用当前克隆中的 scripts/、assets/ 和 references/。
+[AGENTS.md](AGENTS.md) is the entry point. [SKILL.md](SKILL.md) contains the full
+workflow; scripts, templates and the frontend are bundled in the checkout.
+A global skill installation is not required.
 
-## 工作区内保存什么
+## What BugBridge handles
 
-| 位置 | 内容 |
+- **Official forms:** cached PyTorch and TensorFlow examples, source-preserving
+  imports for new forms, and typed field definitions that control presentation.
+- **Reproduction evidence:** frozen criteria, selected executions, source hashes,
+  actual output and existing-environment selection. Missing environments prompt
+  the operator for their location instead of triggering framework installations.
+- **Upstream retrieval:** an authenticated background GitHub queue after successful
+  reproduction, with serial requests, rate-limit recovery, conditional caching
+  and evidence exports. The agent compares triggers and actual fix scope.
+- **Field-only composition:** the agent fills generated answer values. Validation
+  rejects unknown fields/options, stale reviews and inconsistent evidence bindings.
+- **Human review:** a fixed local frontend with official-form links and separately
+  copyable fields. Selection and successful-copy progress persist automatically.
+
+Retrieval results support analysis and human review. They do not automatically prove
+novelty, a duplicate, fix coverage or inclusion in a release. BugBridge's reporting
+workflow does not publish issues/comments or apply framework fixes.
+
+## What stays local
+
+| Location | Purpose |
 | --- | --- |
-| AGENTS.md、SKILL.md、references/ | Agent 的入口、工作流和证据要求 |
-| scripts/ | 模板解析、复现记录、后台检索、字段校验及审阅服务 |
-| assets/ | 固定前端、布局校验基准和已有 PT/TF 模板缓存 |
-| runs/ | 每次任务的输入记录、冻结材料、运行证据和最终报告包 |
-| .local/state/review.sqlite3 | 当前工作区的选中项与复制进度 |
-| tests/ | 使用合成数据和本地服务的回归检查 |
+| `runs/` | Fresh task directories, frozen materials, execution evidence and report packs |
+| `.local/state/review.sqlite3` | This checkout's selection and copy progress |
+| `assets/template-cache/` | Bundled upstream snapshots and normalized form models |
+| Machine-level XDG state | Shared GitHub retrieval queue and request coordination across checkouts |
 
-任务产物、运行状态和本地凭据不会随 Git 克隆。一个新克隆从空任务和空审阅进度开始。
-原始材料可以放在工作区以外；agent 读取它们，并将使用到的证据冻结到任务目录。
+Task data, local state and credentials are excluded from Git. A fresh clone starts
+with no task history or review progress. Material inputs can live outside the checkout;
+used evidence is frozen into the task directory without modifying the originals.
 
-GitHub 检索队列默认共用本机状态位置，以串行控制同一账户的请求额度。
-不同克隆分别处理各自任务，仍然共用这一个队列，不要为加速而另建并行队列。
-使用现有个人访问令牌；令牌保留在本地环境变量或已有 GitHub 登录中，不进入项目文件。
+Use a locally configured GitHub personal access token or an existing authenticated
+CLI login. Keep credentials in local configuration, not in the repository or chat.
 
-## 环境与页面
+## Runtime and checks
 
-使用本地已有 Python。服务、SQLite、缓存导出和检索器使用标准库；验证 YAML
-快照时需要一个已有且包含 PyYAML 的解释器。缺少匹配环境时，agent 应主动询问，
-不会为了运行这个项目强行安装或升级目标库。工具所用的 Python 与缺陷复现环境分别选择。
-
-Agent 会创建新任务，按官方模板准备字段，并启动本地服务。人在浏览器里选择报告、
-打开官方填写页、逐字段复制即可。模板、原始日志和内部任务状态留在证据记录中。
-更换库或材料继续使用同一套前端，不需要让 LLM 改页面。项目不会代替人提交 issue。
-
-在 WSL 中启动服务后，Windows Edge 可以打开返回的 localhost 地址。
-已有端口被占用时使用另一个可用端口，避免影响其他工作区。
-
-## 检查与详细说明
-
-以下命令供 agent 或维护者使用；把 python 换成本地已有的解释器：
+Use an existing Python 3.10+ environment. The HTTP service, SQLite store and GitHub
+retriever use the standard library. YAML snapshot validation requires an existing
+interpreter with PyYAML. Node.js enables clipboard/DOM integration tests. The helper
+interpreter and the target framework's reproduction environment are chosen separately.
 
 ```bash
 python scripts/workspace.py paths
@@ -58,7 +77,16 @@ python scripts/layout_guard.py check
 python -m unittest discover -s tests -v
 ```
 
-完整流程见 [SKILL.md](SKILL.md)，后台检索见
-[检索队列说明](references/retrieval-queue.md)，字段组装见
-[字段填写说明](references/filling.md)，服务与进度见
-[审阅服务说明](references/service.md)。
+Routine checks use synthetic records and local HTTP fixtures. Framework installations
+and new defect reproductions are separate, explicit work. For WSL, open the returned
+localhost URL in Windows Edge; use an available port when another checkout is running.
+
+See the [retrieval queue](references/retrieval-queue.md),
+[field composition](references/filling.md), [review service](references/service.md)
+and [contribution guide](CONTRIBUTING.md) for details.
+
+## License
+
+BugBridge's original code and documentation are [MIT licensed](LICENSE).
+Bundled upstream templates retain their own licenses and attribution; see
+[third-party notices](THIRD_PARTY_NOTICES.md).

@@ -1,4 +1,4 @@
-# Issue Materials Review workspace
+# BugBridge workspace
 
 This checkout is the working project. For requests to prepare issue materials, read
 this checkout's [SKILL.md](SKILL.md), then only the references needed for the task.

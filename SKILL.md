@@ -1,14 +1,14 @@
 ---
-name: issue-materials-to-html
+name: bugbridge
 description: Prepare issue-report materials from a path and library/project name as concise official-field drafts in a fixed local review service with saved copy progress. Reuse cached templates, reproduce in existing local environments, compare official issues/PRs, and fill program-generated field contracts without changing the frontend. Publishing issues and ordinary code fixes are outside this workflow.
 ---
 
-# Issue Materials Review
+# BugBridge
 
 Inputs remain **materials_path** and **library_name**. Prepare traceable reports and
 start a local review service. The human's main workflow is selecting a report,
 opening its official issue page and copying the prepared fields in order. Do not
-publish issues or comments. The existing skill name remains compatible.
+publish issues or comments. This checkout is the source for the BugBridge workflow.
 
 ## Checkout workspace
 
