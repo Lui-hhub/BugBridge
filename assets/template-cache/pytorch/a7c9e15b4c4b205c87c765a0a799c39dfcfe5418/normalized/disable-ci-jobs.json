@@ -1,0 +1,34 @@
+{
+  "id": "disable-ci-jobs",
+  "name": "Disable CI jobs (PyTorch Dev Infra only)",
+  "format": "markdown",
+  "metadata": {
+    "raw_frontmatter": "name: Disable CI jobs (PyTorch Dev Infra only)\nabout: Use this template to disable CI jobs\ntitle: DISABLED [WORKFLOW_NAME] / [PLATFORM_NAME] / [JOB_NAME]\nlabels: 'module: ci'\nassignees: ''\n"
+  },
+  "fields": [
+    {
+      "id": "body",
+      "source_id": null,
+      "type": "textarea",
+      "label": "Issue body",
+      "description": "Fill the original Markdown template, preserving its sections.",
+      "purpose": "body",
+      "required": true,
+      "validations": {
+        "required": true
+      },
+      "default": "> For example, DISABLED pull / win-vs2022-cpu-py3 / test (default). Once\n> created, the job will be disabled within 15 minutes. You can check the\n> list of disabled jobs at https://ossci-metrics.s3.amazonaws.com/disabled-jobs.json\n\n> If you need to get this out ASAP instead of waiting for 15 minutes,\n> you can manually trigger the workflow at https://github.com/pytorch/test-infra/actions/workflows/update_disabled_tests.yml\n> once the issue is created to update the above JSON list right away.\n\n> Noted: you need to have write access to PyTorch repo to disable CI\n> jobs. The issue will be rejected otherwise.\n\n## Reason\n*Provide a reason why this is needed and when this can be resolved*.\n"
+    }
+  ],
+  "title_default": "DISABLED [WORKFLOW_NAME] / [PLATFORM_NAME] / [JOB_NAME]",
+  "source": {
+    "path": "pytorch/a7c9e15b4c4b205c87c765a0a799c39dfcfe5418/raw/disable-ci-jobs.md",
+    "sha256": "8ac5405c42e652b3b5658a96ee14d2ea860583487071349c35b8d4d770384938",
+    "url": "https://github.com/pytorch/pytorch/blob/a7c9e15b4c4b205c87c765a0a799c39dfcfe5418/.github/ISSUE_TEMPLATE/disable-ci-jobs.md",
+    "revision": "a7c9e15b4c4b205c87c765a0a799c39dfcfe5418",
+    "retrieved_at": "2026-11-23T11:04:17.769022+00:00",
+    "status": "official",
+    "limitation": ""
+  },
+  "cache_notes": ""
+}

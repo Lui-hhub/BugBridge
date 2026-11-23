@@ -1,0 +1,289 @@
+{
+  "schema_version": "1.0",
+  "libraries": {
+    "pytorch": {
+      "id": "pytorch",
+      "repository": "https://github.com/pytorch/pytorch",
+      "revision": "a7c9e15b4c4b205c87c765a0a799c39dfcfe5418",
+      "retrieved_at": "2026-11-23T11:04:17.769022+00:00",
+      "aliases": [
+        "pt",
+        "torch",
+        "pytorch/pytorch"
+      ],
+      "templates": [
+        {
+          "id": "blank",
+          "filename": "blank.md",
+          "raw": {
+            "path": "pytorch/a7c9e15b4c4b205c87c765a0a799c39dfcfe5418/raw/blank.md",
+            "sha256": "92175fa91314bde465566b4f228f94985290a1de99ea6dfb97d7b066a1b35100"
+          },
+          "url": "https://github.com/pytorch/pytorch/blob/a7c9e15b4c4b205c87c765a0a799c39dfcfe5418/.github/ISSUE_TEMPLATE/blank.md",
+          "status": "usable",
+          "name": "Blank Issue",
+          "format": "markdown",
+          "normalized": {
+            "path": "pytorch/a7c9e15b4c4b205c87c765a0a799c39dfcfe5418/normalized/blank.json",
+            "sha256": "106058a0467f0c767d2793227daab80f09a7502293acbc7e715bb2801a47fb59"
+          },
+          "purposes_assigned": true
+        },
+        {
+          "id": "bug-report",
+          "filename": "bug-report.yml",
+          "raw": {
+            "path": "pytorch/a7c9e15b4c4b205c87c765a0a799c39dfcfe5418/raw/bug-report.yml",
+            "sha256": "a2ac14a923fc1cadabdb9bfb9d9df3f103199bafba9234567c895550dad68a2a"
+          },
+          "url": "https://github.com/pytorch/pytorch/blob/a7c9e15b4c4b205c87c765a0a799c39dfcfe5418/.github/ISSUE_TEMPLATE/bug-report.yml",
+          "status": "usable",
+          "name": "🐛 Bug Report",
+          "format": "github_form",
+          "normalized": {
+            "path": "pytorch/a7c9e15b4c4b205c87c765a0a799c39dfcfe5418/normalized/bug-report.json",
+            "sha256": "80503b41af866669f777ab7e81843649cfdc01be40ab18272bebccff4aef12a5"
+          },
+          "purposes_assigned": true
+        },
+        {
+          "id": "ci-sev",
+          "filename": "ci-sev.md",
+          "raw": {
+            "path": "pytorch/a7c9e15b4c4b205c87c765a0a799c39dfcfe5418/raw/ci-sev.md",
+            "sha256": "1823e4220bc8ffe1e662ece02aef3d1dbf5199ce529a7c23cf7a51d05e0bfc22"
+          },
+          "url": "https://github.com/pytorch/pytorch/blob/a7c9e15b4c4b205c87c765a0a799c39dfcfe5418/.github/ISSUE_TEMPLATE/ci-sev.md",
+          "status": "usable",
+          "name": "⚠️ CI SEV",
+          "format": "markdown",
+          "normalized": {
+            "path": "pytorch/a7c9e15b4c4b205c87c765a0a799c39dfcfe5418/normalized/ci-sev.json",
+            "sha256": "377c534eff0182b5b8ccd7fda8fbe4412b36f566e1a66f17effce929bfccab9e"
+          },
+          "purposes_assigned": true
+        },
+        {
+          "id": "deprecation",
+          "filename": "deprecation.yml",
+          "raw": {
+            "path": "pytorch/a7c9e15b4c4b205c87c765a0a799c39dfcfe5418/raw/deprecation.yml",
+            "sha256": "066fb15ee0190eb588a31d6e90eb7fdb2ae383f062eb9238c766a8dbd5adfeee"
+          },
+          "url": "https://github.com/pytorch/pytorch/blob/a7c9e15b4c4b205c87c765a0a799c39dfcfe5418/.github/ISSUE_TEMPLATE/deprecation.yml",
+          "status": "usable",
+          "name": "Deprecation tracking",
+          "format": "github_form",
+          "normalized": {
+            "path": "pytorch/a7c9e15b4c4b205c87c765a0a799c39dfcfe5418/normalized/deprecation.json",
+            "sha256": "75ad3da0c7b84410bd9ccbb58448b17e7282b6e23efee9fb0297408f9573b2f2"
+          },
+          "purposes_assigned": true
+        },
+        {
+          "id": "disable-autorevert",
+          "filename": "disable-autorevert.md",
+          "raw": {
+            "path": "pytorch/a7c9e15b4c4b205c87c765a0a799c39dfcfe5418/raw/disable-autorevert.md",
+            "sha256": "21b66fb6af7e908a1549f5f88156bab84928f5f0a0b3c90ecfa942bf5af3d88b"
+          },
+          "url": "https://github.com/pytorch/pytorch/blob/a7c9e15b4c4b205c87c765a0a799c39dfcfe5418/.github/ISSUE_TEMPLATE/disable-autorevert.md",
+          "status": "usable",
+          "name": "D❌​🔙​ ISABLE AUTOREVERT",
+          "format": "markdown",
+          "normalized": {
+            "path": "pytorch/a7c9e15b4c4b205c87c765a0a799c39dfcfe5418/normalized/disable-autorevert.json",
+            "sha256": "b1d45a46d8d48e0867d1c63e13aa407553776b0c9468d5d7ce4b42f9b42da9ab"
+          },
+          "purposes_assigned": true
+        },
+        {
+          "id": "disable-ci-jobs",
+          "filename": "disable-ci-jobs.md",
+          "raw": {
+            "path": "pytorch/a7c9e15b4c4b205c87c765a0a799c39dfcfe5418/raw/disable-ci-jobs.md",
+            "sha256": "8ac5405c42e652b3b5658a96ee14d2ea860583487071349c35b8d4d770384938"
+          },
+          "url": "https://github.com/pytorch/pytorch/blob/a7c9e15b4c4b205c87c765a0a799c39dfcfe5418/.github/ISSUE_TEMPLATE/disable-ci-jobs.md",
+          "status": "usable",
+          "name": "Disable CI jobs (PyTorch Dev Infra only)",
+          "format": "markdown",
+          "normalized": {
+            "path": "pytorch/a7c9e15b4c4b205c87c765a0a799c39dfcfe5418/normalized/disable-ci-jobs.json",
+            "sha256": "76c78e337fa948ce621fdb7cd7946fb665e6ee6dd931782c7fe6068adefcc3bc"
+          },
+          "purposes_assigned": true
+        },
+        {
+          "id": "documentation",
+          "filename": "documentation.yml",
+          "raw": {
+            "path": "pytorch/a7c9e15b4c4b205c87c765a0a799c39dfcfe5418/raw/documentation.yml",
+            "sha256": "f00fba52b2b9e7429077f798bad003c0c816941af1504535858ae1d909b25579"
+          },
+          "url": "https://github.com/pytorch/pytorch/blob/a7c9e15b4c4b205c87c765a0a799c39dfcfe5418/.github/ISSUE_TEMPLATE/documentation.yml",
+          "status": "usable",
+          "name": "📚 Documentation",
+          "format": "github_form",
+          "normalized": {
+            "path": "pytorch/a7c9e15b4c4b205c87c765a0a799c39dfcfe5418/normalized/documentation.json",
+            "sha256": "03e5006bb646f8edebaa1ca94637a49304d793db6f2fa3e596e00317d0342732"
+          },
+          "purposes_assigned": true
+        },
+        {
+          "id": "feature-request",
+          "filename": "feature-request.yml",
+          "raw": {
+            "path": "pytorch/a7c9e15b4c4b205c87c765a0a799c39dfcfe5418/raw/feature-request.yml",
+            "sha256": "53620b840d06b1b2417dc5cc97d1966a4ec86caab17ba4b9443c7cdfc5fc09c6"
+          },
+          "url": "https://github.com/pytorch/pytorch/blob/a7c9e15b4c4b205c87c765a0a799c39dfcfe5418/.github/ISSUE_TEMPLATE/feature-request.yml",
+          "status": "usable",
+          "name": "🚀 Feature request",
+          "format": "github_form",
+          "normalized": {
+            "path": "pytorch/a7c9e15b4c4b205c87c765a0a799c39dfcfe5418/normalized/feature-request.json",
+            "sha256": "9a96ab102a3950dc268d89d92d06fc4865db5cb695f48afb7559aac3826bddbe"
+          },
+          "purposes_assigned": true
+        },
+        {
+          "id": "pt2-bug-report",
+          "filename": "pt2-bug-report.yml",
+          "raw": {
+            "path": "pytorch/a7c9e15b4c4b205c87c765a0a799c39dfcfe5418/raw/pt2-bug-report.yml",
+            "sha256": "ce612eb7899fe065bebb67ae95c0119769d0b12f6f9cbd84005c3e743e818072"
+          },
+          "url": "https://github.com/pytorch/pytorch/blob/a7c9e15b4c4b205c87c765a0a799c39dfcfe5418/.github/ISSUE_TEMPLATE/pt2-bug-report.yml",
+          "status": "usable",
+          "name": "🐛 torch.compile Bug Report",
+          "format": "github_form",
+          "normalized": {
+            "path": "pytorch/a7c9e15b4c4b205c87c765a0a799c39dfcfe5418/normalized/pt2-bug-report.json",
+            "sha256": "5ef79b327999e031a421cbafdb6a1abbbffc7a0f9b428441c7d9db4507cb8221"
+          },
+          "purposes_assigned": true
+        },
+        {
+          "id": "release-feature-request",
+          "filename": "release-feature-request.yml",
+          "raw": {
+            "path": "pytorch/a7c9e15b4c4b205c87c765a0a799c39dfcfe5418/raw/release-feature-request.yml",
+            "sha256": "63df9de2b9f4e2ef1ed382bd129132d83873cdeab05d3ef3d005d439cdf34eec"
+          },
+          "url": "https://github.com/pytorch/pytorch/blob/a7c9e15b4c4b205c87c765a0a799c39dfcfe5418/.github/ISSUE_TEMPLATE/release-feature-request.yml",
+          "status": "usable",
+          "name": "🚀 New Feature for Release",
+          "format": "github_form",
+          "normalized": {
+            "path": "pytorch/a7c9e15b4c4b205c87c765a0a799c39dfcfe5418/normalized/release-feature-request.json",
+            "sha256": "a13e155197a33be1f3ae3d04d4eeae4fe261c4956d5e78bd608c18cfd31fefbc"
+          },
+          "purposes_assigned": true
+        }
+      ],
+      "chooser": {
+        "path": "pytorch/a7c9e15b4c4b205c87c765a0a799c39dfcfe5418/raw/config.yml",
+        "sha256": "d421e66fae500069a640aef2585f0d0129e9e6722ce24c9ac85fdc744106c070",
+        "url": "https://github.com/pytorch/pytorch/blob/a7c9e15b4c4b205c87c765a0a799c39dfcfe5418/.github/ISSUE_TEMPLATE/config.yml"
+      }
+    },
+    "tensorflow": {
+      "id": "tensorflow",
+      "repository": "https://github.com/tensorflow/tensorflow",
+      "revision": "e1c0bc14c92913205413e1bd53e83648aec9b740",
+      "retrieved_at": "2026-11-23T11:04:17.769022+00:00",
+      "aliases": [
+        "tf",
+        "tensorflow/tensorflow"
+      ],
+      "templates": [
+        {
+          "id": "tensorflow_issue_template",
+          "filename": "tensorflow_issue_template.yaml",
+          "raw": {
+            "path": "tensorflow/e1c0bc14c92913205413e1bd53e83648aec9b740/raw/tensorflow_issue_template.yaml",
+            "sha256": "d789d6e2fd6a41ab35751247f8fae9569d2b8d39d91a8431d447b2a6fe3c5703"
+          },
+          "url": "https://github.com/tensorflow/tensorflow/blob/e1c0bc14c92913205413e1bd53e83648aec9b740/.github/ISSUE_TEMPLATE/tensorflow_issue_template.yaml",
+          "status": "usable",
+          "name": "TensorFlow Issue Template",
+          "format": "github_form",
+          "normalized": {
+            "path": "tensorflow/e1c0bc14c92913205413e1bd53e83648aec9b740/normalized/tensorflow_issue_template.json",
+            "sha256": "5d3a23b5f0f0871e96938ad1d96f890de02c2813ee9aaaf24c551735bec52c37"
+          },
+          "purposes_assigned": true
+        },
+        {
+          "id": "tflite-converter-issue",
+          "filename": "tflite-converter-issue.md",
+          "raw": {
+            "path": "tensorflow/e1c0bc14c92913205413e1bd53e83648aec9b740/raw/tflite-converter-issue.md",
+            "sha256": "1dc12a1bba4441cc695ce2e3503a5363a24f690ce0f6e807d17238ce94f09989"
+          },
+          "url": "https://github.com/tensorflow/tensorflow/blob/e1c0bc14c92913205413e1bd53e83648aec9b740/.github/ISSUE_TEMPLATE/tflite-converter-issue.md",
+          "status": "usable",
+          "name": "TensorFlow Lite Converter Issue",
+          "format": "markdown",
+          "normalized": {
+            "path": "tensorflow/e1c0bc14c92913205413e1bd53e83648aec9b740/normalized/tflite-converter-issue.json",
+            "sha256": "846950276fcd07b01f00e6c2c3486b931e7042e0af92eb42fd57a8f665300172"
+          },
+          "purposes_assigned": true
+        },
+        {
+          "id": "tflite-in-play-services",
+          "filename": "tflite-in-play-services.md",
+          "raw": {
+            "path": "tensorflow/e1c0bc14c92913205413e1bd53e83648aec9b740/raw/tflite-in-play-services.md",
+            "sha256": "0ca39d8981df3623c4c39447be3eb3150889b3844b14ccdb278d744b5f19cb97"
+          },
+          "url": "https://github.com/tensorflow/tensorflow/blob/e1c0bc14c92913205413e1bd53e83648aec9b740/.github/ISSUE_TEMPLATE/tflite-in-play-services.md",
+          "status": "usable",
+          "name": "TensorFlow Lite in Play Services issue",
+          "format": "markdown",
+          "normalized": {
+            "path": "tensorflow/e1c0bc14c92913205413e1bd53e83648aec9b740/normalized/tflite-in-play-services.json",
+            "sha256": "027fe82de03a430e8d111ea0383b6977f36386502eb99c406b2c68d7a4d6722d"
+          },
+          "purposes_assigned": true
+        },
+        {
+          "id": "tflite-op-request",
+          "filename": "tflite-op-request.md",
+          "raw": {
+            "path": "tensorflow/e1c0bc14c92913205413e1bd53e83648aec9b740/raw/tflite-op-request.md",
+            "sha256": "ba9df47540f93451d48ce864db1b3bf3d2b3dafe6e9ddf20440f2dd2f169a196"
+          },
+          "url": "https://github.com/tensorflow/tensorflow/blob/e1c0bc14c92913205413e1bd53e83648aec9b740/.github/ISSUE_TEMPLATE/tflite-op-request.md",
+          "status": "usable",
+          "name": "TensorFlow Lite Op Request",
+          "format": "markdown",
+          "normalized": {
+            "path": "tensorflow/e1c0bc14c92913205413e1bd53e83648aec9b740/normalized/tflite-op-request.json",
+            "sha256": "7caa88a0ace425056db49137de240cba565fef13bcc98bfdce907b2bc4511632"
+          },
+          "purposes_assigned": true
+        },
+        {
+          "id": "tflite-other",
+          "filename": "tflite-other.md",
+          "raw": {
+            "path": "tensorflow/e1c0bc14c92913205413e1bd53e83648aec9b740/raw/tflite-other.md",
+            "sha256": "67338ec8dd48481b6280c72698241964932aa5ebbc09418f1a1387399d2401e9"
+          },
+          "url": "https://github.com/tensorflow/tensorflow/blob/e1c0bc14c92913205413e1bd53e83648aec9b740/.github/ISSUE_TEMPLATE/tflite-other.md",
+          "status": "needs_review",
+          "reason": "Markdown file lacks template frontmatter; do not infer form controls from embedded YAML-like prose"
+        }
+      ],
+      "chooser": {
+        "path": "tensorflow/e1c0bc14c92913205413e1bd53e83648aec9b740/raw/config.yml",
+        "sha256": "012435fd0880e6cbacac3547fb977d8db2725d65c8fa61b8c085ccecd5dca602",
+        "url": "https://github.com/tensorflow/tensorflow/blob/e1c0bc14c92913205413e1bd53e83648aec9b740/.github/ISSUE_TEMPLATE/config.yml"
+      }
+    }
+  }
+}

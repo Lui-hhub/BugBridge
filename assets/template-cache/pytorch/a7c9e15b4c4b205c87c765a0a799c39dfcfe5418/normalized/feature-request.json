@@ -1,0 +1,168 @@
+{
+  "id": "feature-request",
+  "name": "🚀 Feature request",
+  "format": "github_form",
+  "description": "Submit a proposal/request for a new PyTorch feature",
+  "title_default": "",
+  "fields": [
+    {
+      "id": "element-1",
+      "source_id": null,
+      "source_index": 0,
+      "type": "markdown",
+      "label": "Template instructions",
+      "description": "",
+      "purpose": "instruction",
+      "required": false,
+      "validations": {},
+      "options": [],
+      "multiple": false,
+      "default": "#### Before submitting, please review the [issue lifecycle](https://github.com/pytorch/pytorch/blob/main/CONTRIBUTING.md#issue-lifecycle) and [AI-Assisted Development](https://github.com/pytorch/pytorch/blob/main/AI_POLICY.md) policy. Issues that do not follow these practices will be automatically closed and users breaking these rules repeatedly may be banned.\n",
+      "default_index": null,
+      "placeholder": "",
+      "render": null,
+      "raw": {
+        "type": "markdown",
+        "attributes": {
+          "value": "#### Before submitting, please review the [issue lifecycle](https://github.com/pytorch/pytorch/blob/main/CONTRIBUTING.md#issue-lifecycle) and [AI-Assisted Development](https://github.com/pytorch/pytorch/blob/main/AI_POLICY.md) policy. Issues that do not follow these practices will be automatically closed and users breaking these rules repeatedly may be banned.\n"
+        }
+      }
+    },
+    {
+      "id": "element-2",
+      "source_id": null,
+      "source_index": 1,
+      "type": "markdown",
+      "label": "Template instructions",
+      "description": "",
+      "purpose": "instruction",
+      "required": false,
+      "validations": {},
+      "options": [],
+      "multiple": false,
+      "default": "#### Note: Please write your feature request in English to ensure it can be understood and addressed by the development team.\n",
+      "default_index": null,
+      "placeholder": "",
+      "render": null,
+      "raw": {
+        "type": "markdown",
+        "attributes": {
+          "value": "#### Note: Please write your feature request in English to ensure it can be understood and addressed by the development team.\n"
+        }
+      }
+    },
+    {
+      "id": "element-3",
+      "source_id": null,
+      "source_index": 2,
+      "type": "textarea",
+      "label": "🚀 The feature, motivation and pitch",
+      "description": "A clear and concise description of the feature proposal. Please outline the motivation for the proposal. Is your feature request related to a specific problem? e.g., *\"I'm working on X and would like Y to be possible\"*. If this is related to another GitHub issue, please link here too. Focus on the problem you are facing; do not include an AI-generated proposal for how to implement it.\n",
+      "purpose": "problem",
+      "required": true,
+      "validations": {
+        "required": true
+      },
+      "options": [],
+      "multiple": false,
+      "default": "",
+      "default_index": null,
+      "placeholder": "",
+      "render": null,
+      "raw": {
+        "type": "textarea",
+        "attributes": {
+          "label": "🚀 The feature, motivation and pitch",
+          "description": "A clear and concise description of the feature proposal. Please outline the motivation for the proposal. Is your feature request related to a specific problem? e.g., *\"I'm working on X and would like Y to be possible\"*. If this is related to another GitHub issue, please link here too. Focus on the problem you are facing; do not include an AI-generated proposal for how to implement it.\n"
+        },
+        "validations": {
+          "required": true
+        }
+      },
+      "purpose_reason": "Assigned from this cached control label and description; A clear and concise description of the feature proposal. Please outline the motivation for the proposal. Is your feature request related to a specific problem? e.g., *\"I'm working on X and would like Y to be possible\"*. "
+    },
+    {
+      "id": "element-4",
+      "source_id": null,
+      "source_index": 3,
+      "type": "textarea",
+      "label": "Alternatives",
+      "description": "A description of any alternative solutions or features you've considered, if any.\n",
+      "purpose": "other",
+      "required": false,
+      "validations": {},
+      "options": [],
+      "multiple": false,
+      "default": "",
+      "default_index": null,
+      "placeholder": "",
+      "render": null,
+      "raw": {
+        "type": "textarea",
+        "attributes": {
+          "label": "Alternatives",
+          "description": "A description of any alternative solutions or features you've considered, if any.\n"
+        }
+      },
+      "purpose_reason": "Assigned from this cached control label and description; A description of any alternative solutions or features you've considered, if any.\n"
+    },
+    {
+      "id": "element-5",
+      "source_id": null,
+      "source_index": 4,
+      "type": "textarea",
+      "label": "Additional context",
+      "description": "Add any other context or screenshots about the feature request.\n",
+      "purpose": "other",
+      "required": false,
+      "validations": {},
+      "options": [],
+      "multiple": false,
+      "default": "",
+      "default_index": null,
+      "placeholder": "",
+      "render": null,
+      "raw": {
+        "type": "textarea",
+        "attributes": {
+          "label": "Additional context",
+          "description": "Add any other context or screenshots about the feature request.\n"
+        }
+      },
+      "purpose_reason": "Assigned from this cached control label and description; Add any other context or screenshots about the feature request.\n"
+    },
+    {
+      "id": "element-6",
+      "source_id": null,
+      "source_index": 5,
+      "type": "markdown",
+      "label": "Template instructions",
+      "description": "",
+      "purpose": "instruction",
+      "required": false,
+      "validations": {},
+      "options": [],
+      "multiple": false,
+      "default": "Thanks for contributing 🎉!\n",
+      "default_index": null,
+      "placeholder": "",
+      "render": null,
+      "raw": {
+        "type": "markdown",
+        "attributes": {
+          "value": "Thanks for contributing 🎉!\n"
+        }
+      }
+    }
+  ],
+  "source": {
+    "path": "pytorch/a7c9e15b4c4b205c87c765a0a799c39dfcfe5418/raw/feature-request.yml",
+    "sha256": "53620b840d06b1b2417dc5cc97d1966a4ec86caab17ba4b9443c7cdfc5fc09c6",
+    "url": "https://github.com/pytorch/pytorch/blob/a7c9e15b4c4b205c87c765a0a799c39dfcfe5418/.github/ISSUE_TEMPLATE/feature-request.yml",
+    "revision": "a7c9e15b4c4b205c87c765a0a799c39dfcfe5418",
+    "retrieved_at": "2026-11-23T11:04:17.769022+00:00",
+    "status": "official",
+    "limitation": ""
+  },
+  "cache_notes": "Specialized template: route only when the supplied claim matches its purpose."
+}

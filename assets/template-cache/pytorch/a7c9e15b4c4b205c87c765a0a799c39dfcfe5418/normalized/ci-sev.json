@@ -1,0 +1,34 @@
+{
+  "id": "ci-sev",
+  "name": "⚠️ CI SEV",
+  "format": "markdown",
+  "metadata": {
+    "raw_frontmatter": "name: \"⚠️ CI SEV\"\nabout: Tracking incidents for PyTorch's CI infra.\ntitle: ''\nlabels: ''\nassignees: ''\n"
+  },
+  "fields": [
+    {
+      "id": "body",
+      "source_id": null,
+      "type": "textarea",
+      "label": "Issue body",
+      "description": "Fill the original Markdown template, preserving its sections.",
+      "purpose": "body",
+      "required": true,
+      "validations": {
+        "required": true
+      },
+      "default": "> NOTE: Remember to label this issue with \"`ci: sev`\"\n>       If you want autorevert to be disabled, keep the ci: disable-autorevert label\n\n <!-- Add the `merge blocking` label to this PR to prevent PRs from being merged while this issue is open -->\n\n## Current Status\n*Status could be: preemptive, ongoing, mitigated, closed. Also tell people if they need to take action to fix it (i.e. rebase)*.\n\n## Error looks like\n*Provide some way users can tell that this SEV is causing their issue.*\n\n## Incident timeline (all times pacific)\n*Include when the incident began, when it was detected, mitigated, root caused, and finally closed.*\n\n## User impact\n*How does this affect users of PyTorch CI?*\n\n## Root cause\n*What was the root cause of this issue?*\n\n## Mitigation\n*How did we mitigate the issue?*\n\n## Prevention/followups\n*How do we prevent issues like this in the future?*\n"
+    }
+  ],
+  "title_default": "",
+  "source": {
+    "path": "pytorch/a7c9e15b4c4b205c87c765a0a799c39dfcfe5418/raw/ci-sev.md",
+    "sha256": "1823e4220bc8ffe1e662ece02aef3d1dbf5199ce529a7c23cf7a51d05e0bfc22",
+    "url": "https://github.com/pytorch/pytorch/blob/a7c9e15b4c4b205c87c765a0a799c39dfcfe5418/.github/ISSUE_TEMPLATE/ci-sev.md",
+    "revision": "a7c9e15b4c4b205c87c765a0a799c39dfcfe5418",
+    "retrieved_at": "2026-11-23T11:04:17.769022+00:00",
+    "status": "official",
+    "limitation": ""
+  },
+  "cache_notes": ""
+}

@@ -1,0 +1,23 @@
+__pycache__/
+*.py[cod]
+.pytest_cache/
+.coverage
+htmlcov/
+
+# Task data and persistent runtime state belong to the local workspace.
+/runs/
+/.local/
+/materials/
+/inputs/
+*.sqlite3
+*.sqlite3-wal
+*.sqlite3-shm
+*.worker.lock
+*.daemon.lock
+
+# Credentials remain outside tracked source.
+.env
+.env.*
+!.env.example
+*.pem
+*.key

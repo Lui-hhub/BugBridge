@@ -1,0 +1,34 @@
+{
+  "id": "tflite-in-play-services",
+  "name": "TensorFlow Lite in Play Services issue",
+  "format": "markdown",
+  "metadata": {
+    "raw_frontmatter": "name: TensorFlow Lite in Play Services issue\nabout: Use this template for issues with TensorFlow Lite in Google Play Services\nlabels: 'comp:lite-in-play-services'\n"
+  },
+  "fields": [
+    {
+      "id": "body",
+      "source_id": null,
+      "type": "textarea",
+      "label": "Issue body",
+      "description": "Fill the original Markdown template, preserving its sections.",
+      "purpose": "body",
+      "required": true,
+      "validations": {
+        "required": true
+      },
+      "default": "**System information**\n- Android Device information (use `adb shell getprop ro.build.fingerprint`\n  if possible):\n- TensorFlow Lite in Play Services SDK version (found in `build.gradle`):\n- Google Play Services version\n  (`Settings` > `Apps` > `Google Play Services` > `App details`):\n\n**Standalone code to reproduce the issue**\nProvide a reproducible test case that is the bare minimum necessary to generate\nthe problem. If possible, please share a link to or attach code demonstrating\nthe problem.\n\n**Any other info / logs**\nInclude any logs or source code that would be helpful to diagnose the problem.\nIf including tracebacks, please include the full traceback. Large logs and files\nshould be attached.\n"
+    }
+  ],
+  "title_default": "",
+  "source": {
+    "path": "tensorflow/e1c0bc14c92913205413e1bd53e83648aec9b740/raw/tflite-in-play-services.md",
+    "sha256": "0ca39d8981df3623c4c39447be3eb3150889b3844b14ccdb278d744b5f19cb97",
+    "url": "https://github.com/tensorflow/tensorflow/blob/e1c0bc14c92913205413e1bd53e83648aec9b740/.github/ISSUE_TEMPLATE/tflite-in-play-services.md",
+    "revision": "e1c0bc14c92913205413e1bd53e83648aec9b740",
+    "retrieved_at": "2026-11-23T11:04:17.769022+00:00",
+    "status": "official",
+    "limitation": ""
+  },
+  "cache_notes": ""
+}

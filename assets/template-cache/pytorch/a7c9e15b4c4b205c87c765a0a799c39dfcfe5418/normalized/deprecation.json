@@ -1,0 +1,293 @@
+{
+  "id": "deprecation",
+  "name": "Deprecation tracking",
+  "format": "github_form",
+  "description": "Track a deprecation, freeze, or removal of a PyTorch API or component",
+  "title_default": "[deprecation] ",
+  "fields": [
+    {
+      "id": "element-1",
+      "source_id": null,
+      "source_index": 0,
+      "type": "markdown",
+      "label": "Template instructions",
+      "description": "",
+      "purpose": "instruction",
+      "required": false,
+      "validations": {},
+      "options": [],
+      "multiple": false,
+      "default": "One issue per deprecated API or frozen component. After filing, attach this issue as a sub-issue of the umbrella [#201298](https://github.com/pytorch/pytorch/issues/201298). Warning periods follow the [backward compatibility policy](https://github.com/pytorch/pytorch/wiki/PyTorch%27s-Python-Frontend-Backward-and-Forward-Compatibility-Policy). See [AI-Assisted Development](https://github.com/pytorch/pytorch/blob/main/AI_POLICY.md) policy.\n",
+      "default_index": null,
+      "placeholder": "",
+      "render": null,
+      "raw": {
+        "type": "markdown",
+        "attributes": {
+          "value": "One issue per deprecated API or frozen component. After filing, attach this issue as a sub-issue of the umbrella [#201298](https://github.com/pytorch/pytorch/issues/201298). Warning periods follow the [backward compatibility policy](https://github.com/pytorch/pytorch/wiki/PyTorch%27s-Python-Frontend-Backward-and-Forward-Compatibility-Policy). See [AI-Assisted Development](https://github.com/pytorch/pytorch/blob/main/AI_POLICY.md) policy.\n"
+        }
+      }
+    },
+    {
+      "id": "api",
+      "source_id": "api",
+      "source_index": 1,
+      "type": "input",
+      "label": "API or component",
+      "description": "e.g. `torch.foo`, `torch.nn.functional.bar(..., baz=)`, C++ frontend `torch::nn`",
+      "purpose": "problem",
+      "required": true,
+      "validations": {
+        "required": true
+      },
+      "options": [],
+      "multiple": false,
+      "default": "",
+      "default_index": null,
+      "placeholder": "",
+      "render": null,
+      "raw": {
+        "type": "input",
+        "id": "api",
+        "attributes": {
+          "label": "API or component",
+          "description": "e.g. `torch.foo`, `torch.nn.functional.bar(..., baz=)`, C++ frontend `torch::nn`"
+        },
+        "validations": {
+          "required": true
+        }
+      },
+      "purpose_reason": "Assigned from this cached control label and description; e.g. `torch.foo`, `torch.nn.functional.bar(..., baz=)`, C++ frontend `torch::nn`"
+    },
+    {
+      "id": "kind",
+      "source_id": "kind",
+      "source_index": 2,
+      "type": "dropdown",
+      "label": "Kind",
+      "description": "",
+      "purpose": "other",
+      "required": true,
+      "validations": {
+        "required": true
+      },
+      "options": [
+        "Removal",
+        "Behavior change",
+        "Frozen component"
+      ],
+      "multiple": false,
+      "default": "",
+      "default_index": null,
+      "placeholder": "",
+      "render": null,
+      "raw": {
+        "type": "dropdown",
+        "id": "kind",
+        "attributes": {
+          "label": "Kind",
+          "options": [
+            "Removal",
+            "Behavior change",
+            "Frozen component"
+          ]
+        },
+        "validations": {
+          "required": true
+        }
+      },
+      "purpose_reason": "Assigned from this cached control label and description; "
+    },
+    {
+      "id": "deprecated-in",
+      "source_id": "deprecated-in",
+      "source_index": 3,
+      "type": "input",
+      "label": "Deprecated in",
+      "description": "Release that first ships the warning or freeze, e.g. `2.15`",
+      "purpose": "other",
+      "required": true,
+      "validations": {
+        "required": true
+      },
+      "options": [],
+      "multiple": false,
+      "default": "",
+      "default_index": null,
+      "placeholder": "",
+      "render": null,
+      "raw": {
+        "type": "input",
+        "id": "deprecated-in",
+        "attributes": {
+          "label": "Deprecated in",
+          "description": "Release that first ships the warning or freeze, e.g. `2.15`"
+        },
+        "validations": {
+          "required": true
+        }
+      },
+      "purpose_reason": "Assigned from this cached control label and description; Release that first ships the warning or freeze, e.g. `2.15`"
+    },
+    {
+      "id": "removal-target",
+      "source_id": "removal-target",
+      "source_index": 4,
+      "type": "input",
+      "label": "Removal target",
+      "description": "At least two releases after \"Deprecated in\", e.g. `2.18`. Use `none` for a frozen component with no removal plan.",
+      "purpose": "other",
+      "required": true,
+      "validations": {
+        "required": true
+      },
+      "options": [],
+      "multiple": false,
+      "default": "",
+      "default_index": null,
+      "placeholder": "",
+      "render": null,
+      "raw": {
+        "type": "input",
+        "id": "removal-target",
+        "attributes": {
+          "label": "Removal target",
+          "description": "At least two releases after \"Deprecated in\", e.g. `2.18`. Use `none` for a frozen component with no removal plan."
+        },
+        "validations": {
+          "required": true
+        }
+      },
+      "purpose_reason": "Assigned from this cached control label and description; At least two releases after \"Deprecated in\", e.g. `2.18`. Use `none` for a frozen component with no removal plan."
+    },
+    {
+      "id": "next-step",
+      "source_id": "next-step",
+      "source_index": 5,
+      "type": "input",
+      "label": "Next step",
+      "description": "Next action and target release, e.g. `remove in 2.18`. Use `none` for a frozen component with no planned action. Used to assign milestones.",
+      "purpose": "other",
+      "required": true,
+      "validations": {
+        "required": true
+      },
+      "options": [],
+      "multiple": false,
+      "default": "",
+      "default_index": null,
+      "placeholder": "",
+      "render": null,
+      "raw": {
+        "type": "input",
+        "id": "next-step",
+        "attributes": {
+          "label": "Next step",
+          "description": "Next action and target release, e.g. `remove in 2.18`. Use `none` for a frozen component with no planned action. Used to assign milestones."
+        },
+        "validations": {
+          "required": true
+        }
+      },
+      "purpose_reason": "Assigned from this cached control label and description; Next action and target release, e.g. `remove in 2.18`. Use `none` for a frozen component with no planned action. Used to assign milestones."
+    },
+    {
+      "id": "replacement",
+      "source_id": "replacement",
+      "source_index": 6,
+      "type": "textarea",
+      "label": "Replacement and migration",
+      "description": "What users should use instead, or how to keep the current behavior.",
+      "purpose": "other",
+      "required": true,
+      "validations": {
+        "required": true
+      },
+      "options": [],
+      "multiple": false,
+      "default": "",
+      "default_index": null,
+      "placeholder": "",
+      "render": null,
+      "raw": {
+        "type": "textarea",
+        "id": "replacement",
+        "attributes": {
+          "label": "Replacement and migration",
+          "description": "What users should use instead, or how to keep the current behavior."
+        },
+        "validations": {
+          "required": true
+        }
+      },
+      "purpose_reason": "Assigned from this cached control label and description; What users should use instead, or how to keep the current behavior."
+    },
+    {
+      "id": "owner",
+      "source_id": "owner",
+      "source_index": 7,
+      "type": "input",
+      "label": "Owner",
+      "description": "GitHub handle responsible for the next step",
+      "purpose": "other",
+      "required": true,
+      "validations": {
+        "required": true
+      },
+      "options": [],
+      "multiple": false,
+      "default": "",
+      "default_index": null,
+      "placeholder": "",
+      "render": null,
+      "raw": {
+        "type": "input",
+        "id": "owner",
+        "attributes": {
+          "label": "Owner",
+          "description": "GitHub handle responsible for the next step"
+        },
+        "validations": {
+          "required": true
+        }
+      },
+      "purpose_reason": "Assigned from this cached control label and description; GitHub handle responsible for the next step"
+    },
+    {
+      "id": "prs",
+      "source_id": "prs",
+      "source_index": 8,
+      "type": "textarea",
+      "label": "PRs",
+      "description": "Deprecation PR, and later the error/removal PRs",
+      "purpose": "other",
+      "required": false,
+      "validations": {},
+      "options": [],
+      "multiple": false,
+      "default": "",
+      "default_index": null,
+      "placeholder": "",
+      "render": null,
+      "raw": {
+        "type": "textarea",
+        "id": "prs",
+        "attributes": {
+          "label": "PRs",
+          "description": "Deprecation PR, and later the error/removal PRs"
+        }
+      },
+      "purpose_reason": "Assigned from this cached control label and description; Deprecation PR, and later the error/removal PRs"
+    }
+  ],
+  "source": {
+    "path": "pytorch/a7c9e15b4c4b205c87c765a0a799c39dfcfe5418/raw/deprecation.yml",
+    "sha256": "066fb15ee0190eb588a31d6e90eb7fdb2ae383f062eb9238c766a8dbd5adfeee",
+    "url": "https://github.com/pytorch/pytorch/blob/a7c9e15b4c4b205c87c765a0a799c39dfcfe5418/.github/ISSUE_TEMPLATE/deprecation.yml",
+    "revision": "a7c9e15b4c4b205c87c765a0a799c39dfcfe5418",
+    "retrieved_at": "2026-11-23T11:04:17.769022+00:00",
+    "status": "official",
+    "limitation": ""
+  },
+  "cache_notes": "Specialized template: route only when the supplied claim matches its purpose."
+}

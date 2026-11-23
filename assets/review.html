@@ -1,0 +1,139 @@
+<!doctype html>
+<html lang="zh-CN">
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Issue 材料审阅</title>
+<style>
+:root{font:14px/1.65 "Segoe UI","Microsoft YaHei",sans-serif;color:#25364a;background:#edf2f4;--ink:#25364a;--line:#cad5dd;--teal:#176b66;--amber:#9b5d19}*{box-sizing:border-box}body{margin:0}header{background:var(--ink);color:white;padding:20px 28px}h1{font:600 25px/1.3 Bahnschrift,"Microsoft YaHei",sans-serif;margin:0 0 8px}header p{margin:4px 0;color:#dce6ec}.layout{display:grid;grid-template-columns:330px minmax(0,1fr);min-height:calc(100vh - 120px)}aside{padding:18px;border-right:1px solid var(--line);background:#e5ecef}.filters{display:grid;grid-template-columns:1fr 1fr;gap:9px}.filters label,.filters #search{grid-column:1/-1}input,select,button,textarea{font:inherit}select,input[type=text],#search{min-width:0;padding:8px;border:1px solid #aebfc9;border-radius:3px;background:white;color:var(--ink)}button{border:1px solid #aebfc9;border-radius:3px;padding:8px 12px;background:white;color:var(--ink);cursor:pointer}button.primary{background:var(--teal);border-color:var(--teal);color:white}button:disabled{opacity:.45;cursor:default}button:focus-visible,input:focus-visible,select:focus-visible,textarea:focus-visible,a:focus-visible,summary:focus-visible{outline:3px solid #48a7b4;outline-offset:3px}.queue-item{display:block;width:100%;text-align:left;margin:9px 0;padding:12px;border-left:4px solid #82929d}.queue-item[data-action=new_issue]{border-left-color:var(--teal)}.queue-item[data-action=existing_issue_comment]{border-left-color:#366b9a}.queue-item[data-action=needs_evidence]{border-left-color:var(--amber)}.queue-item.active{background:#f3fbfa;box-shadow:0 0 0 1px var(--teal)}.queue-item small{display:block;color:#526977;margin-top:5px}.queue-item strong{font-weight:600}main{padding:26px 32px;min-width:0;max-width:1200px;width:100%;margin:0 auto}h2{font-size:24px;line-height:1.4;margin:9px 0 14px}.meta{font-size:12px;color:#526977;overflow-wrap:anywhere}.identity{font:600 13px Consolas,monospace;color:var(--teal);letter-spacing:.04em}.notice{padding:12px 15px;background:#fff5e5;border-left:4px solid var(--amber);white-space:pre-wrap;margin:14px 0}.readiness{display:grid;grid-template-columns:repeat(3,1fr);border:1px solid var(--line);background:#fff;margin:20px 0}.readiness div{padding:12px 16px;border-right:1px solid var(--line)}.readiness div:last-child{border:0}.readiness small,.readiness strong{display:block}.readiness small{color:#526977}.actions,.tabs,.field-line{display:flex;align-items:center;flex-wrap:wrap;gap:9px;margin:14px 0}.field-line select{flex:1}.actions label{margin-left:auto;font-size:12px}.tabs button[aria-pressed=true]{background:#e0eeed;border-color:var(--teal);color:var(--teal)}textarea{width:100%;min-height:330px;resize:vertical;padding:16px;border:1px solid var(--line);border-radius:3px;background:white;white-space:pre;font:12px/1.7 Consolas,monospace;color:var(--ink)}.preview{padding:20px 24px;min-height:220px;background:white;border:1px solid var(--line);overflow-wrap:anywhere}.preview p{margin:10px 0}.preview h1,.preview h2,.preview h3,.preview h4{font-family:inherit;line-height:1.4;margin:22px 0 10px}.preview h1{font-size:24px}.preview h2{font-size:21px}.preview h3{font-size:18px}.preview h4{font-size:16px}pre{white-space:pre-wrap;overflow-wrap:anywhere;padding:14px;background:#f5f8f9;border:1px solid var(--line);font:12px/1.65 Consolas,monospace;max-height:460px;overflow:auto}code{font:12px Consolas,monospace;background:#edf2f4;padding:1px 3px}pre code{padding:0;background:none}details{margin:17px 0}summary{font-weight:600;cursor:pointer}a{color:#176b79}table{border-collapse:collapse;max-width:100%;display:block;overflow:auto}td,th{padding:7px 11px;border:1px solid var(--line);text-align:left}blockquote{margin:12px 0;padding:0 14px;border-left:3px solid #9db4c2;color:#526977}.description{white-space:pre-wrap;font-size:13px}.selection-options{padding:10px;background:white;border:1px solid var(--line)}.selection-options label{display:block}.selection-options input{margin-right:8px}.match{border-top:1px solid var(--line);padding:12px 0}.match p{margin:5px 0}#typed input[type=text]{width:100%}#toast{position:fixed;bottom:20px;left:50%;transform:translateX(-50%);padding:10px 16px;background:var(--ink);color:white}#empty{padding:24px;color:#526977}[hidden]{display:none!important}@media(max-width:850px){.layout{grid-template-columns:260px minmax(0,1fr)}main{padding:20px}.filters{grid-template-columns:1fr}}@media(max-width:650px){.layout{display:block}aside{border-right:0;border-bottom:1px solid var(--line)}#queue{max-height:280px;overflow:auto}.filters{grid-template-columns:1fr 1fr}.readiness{grid-template-columns:1fr}.readiness div{border-right:0;border-bottom:1px solid var(--line)}header{padding:20px}main{padding:20px}.preview{padding:14px}.actions label{margin-left:0}}
+</style>
+<header><h1 id="heading">Issue 材料审阅</h1><p id="subtitle"></p><p id="overview"></p></header>
+<div class="layout"><aside>
+<div class="filters"><label for="search">搜索标题、材料 ID 或处置依据</label><input id="search" autocomplete="off">
+<select id="actionfilter" aria-label="后续处置"><option value="all">全部处置</option></select>
+<select id="coveragefilter" aria-label="检索覆盖"><option value="all">全部检索范围</option></select>
+<select id="relationfilter" aria-label="上游关系"><option value="all">全部上游关系</option></select>
+<select id="todofilter" aria-label="提交待办"><option value="all">全部待办状态</option><option value="pending">有待办或需整理</option><option value="clear">待办已处理</option></select>
+<select id="reprofilter" aria-label="复现状态"><option value="all">全部复现状态</option></select>
+<select id="kindfilter" aria-label="问题类型"><option value="all">全部问题类型</option></select></div><p id="count" class="meta"></p><nav id="queue" aria-label="材料处置列表"></nav>
+<details><summary>本轮检查范围与限制</summary><div id="limitations"></div></details>
+</aside><div><p id="empty" hidden>没有符合当前筛选条件的记录。调整筛选后继续审阅。</p><main id="main">
+<p id="identity" class="identity"></p><h2 id="title"></h2><p id="states" class="meta"></p><p id="finding"></p>
+<div class="notice"><strong id="actionlabel"></strong><p id="actionreason"></p><a id="target" target="_blank" rel="noopener noreferrer">打开对应 issue ↗</a></div>
+<div class="readiness"><div><small>证据与关联校验</small><strong id="integrity"></strong></div><div><small id="formlabel">投稿字段</small><strong id="formstate"></strong></div><div><small>提交前人工待办</small><strong id="todostate"></strong></div></div>
+<div id="blockers" class="notice" hidden></div><div id="quality" class="notice" hidden></div>
+<details id="todopanel"><summary>查看提交前待办</summary><div id="todos"></div><p class="meta">待办可以在本地制作完成后继续保留。个人声明、人类解释及附件由操作者处理。</p></details>
+<div class="actions"><button id="copytitle">复制标题草稿</button><label><input id="processed" type="checkbox">已查看（仅本地标记）</label></div>
+<div id="formpanel"><p id="template" class="meta"></p><a id="templatesource" target="_blank" rel="noopener noreferrer">查看模板来源 ↗</a><p id="templatelimit" class="notice" hidden></p>
+<details id="instructionpanel"><summary>官方填写说明</summary><div id="instructions"></div></details>
+<div class="field-line"><label for="fieldselect">投稿字段</label><select id="fieldselect"></select><button id="copyfield" class="primary">复制当前字段草稿</button></div>
+<p id="fieldmeta" class="meta"></p><p id="description" class="description"></p><div id="typed"></div>
+<div class="tabs"><button id="fieldtab">当前字段</button><button id="bodytab">完整正文</button><button id="previewtab">阅读预览</button><button id="rawtab">原始文本</button><button id="copyview">复制当前视图草稿</button></div>
+<p class="meta">预览支持常用 Markdown；原始文本是复制到表单的实际内容。</p><div id="preview" class="preview"></div><textarea id="content" readonly spellcheck="false" aria-label="复制内容" hidden></textarea></div>
+<p id="archivenote" class="meta" hidden>本条作为归档或待补证据记录保留，展示处置依据和证据，不生成投稿表单。</p>
+<details id="legacypanel" hidden><summary>旧格式原始草稿（尚未整理为当前处置所需内容）</summary><pre id="legacybody"></pre></details>
+<details><summary>复现、判据与执行证据</summary><p id="criterion"></p><div id="runs"></div></details>
+<details><summary>上游 issue / PR 比较</summary><p id="upstream"></p><div id="matches"></div></details>
+<details id="requestpanel"><summary>等待操作者回复的事项</summary><div id="requests"></div></details>
+<p class="meta">本页供人工筛选和逐字段复制。报告复制适用于新 issue 草稿和补充评论；原始证据源码可独立复制。阅读标记不代表审核签署，页面不会提交 issue。</p>
+</main></div></div><div id="toast" role="status" hidden></div>
+<script>
+const REVIEW=JSON.parse(__REVIEW_DATA__);
+const byId=new Map(REVIEW.cards.map(x=>[x.id,x]));
+const el=id=>document.getElementById(id);
+const node=(tag,text)=>{const n=document.createElement(tag);if(text!==undefined)n.textContent=String(text);return n;};
+const LABEL={new_issue:'新 issue 候选',existing_issue_comment:'补充已有 issue',needs_evidence:'等待更多证据',no_submission:'归档，不提交',complete_in_scope:'已检查范围完整',partial:'检索部分完成',not_searched:'尚未检索',not_applicable:'不适用',same_issue:'同一问题',same_mechanism:'相同机制',related:'相关',no_match_in_scope:'已读范围未找到匹配',unknown:'尚不确定',reproduced:'已复现目标现象',not_reproduced:'未复现目标现象',inconclusive:'结论不确定',awaiting_environment:'等待匹配环境',insufficient_material:'材料不足',skipped_by_operator:'操作者明确跳过',needs_review:'待人工审阅',supported:'证据支持',excluded:'已排除',merged:'已合并',deferred:'待补证据',bug:'运行时问题',documentation:'文档问题',observed:'出现目标现象',not_observed:'未出现目标现象',not_assessed:'未判断现象',returned:'正常退出',nonzero_exit:'非零退出',process_signal:'进程信号',timeout:'超时终止',memory_limit:'内存限制终止',setup_error:'准备失败'};
+const label=value=>LABEL[value]||value;
+const storageKey='issue-materials-to-html:'+REVIEW.run_id;
+let selected=null,fieldIndex=0,mode='field',view='preview',reviewed=Object.create(null);
+try{const value=JSON.parse(localStorage.getItem(storageKey)||'{}');if(value&&typeof value==='object'&&!Array.isArray(value))reviewed=Object.assign(Object.create(null),value);}catch(e){}
+function externalURL(value){try{const u=new URL(value);return ['https:','http:'].includes(u.protocol)?u.href:null;}catch(e){return null;}}
+function inline(parent,text){
+  const pattern=/(`+)([\s\S]*?)\1|\*\*([^*]+)\*\*|\[([^\]]+)\]\(([^\s)]+)\)/g;let end=0,m;
+  while((m=pattern.exec(text))){if(m.index>end)parent.append(node('span',text.slice(end,m.index)));
+    if(m[1])parent.append(node('code',m[2]));else if(m[3])parent.append(node('strong',m[3]));else{const url=externalURL(m[5]);if(url){const a=node('a',m[4]);a.href=url;a.target='_blank';a.rel='noopener noreferrer';parent.append(a);}else parent.append(node('span',m[0]));}end=pattern.lastIndex;
+  }if(end<text.length)parent.append(node('span',text.slice(end)));
+}
+function renderMarkdown(parent,text){
+  parent.replaceChildren();const lines=text.replace(/\r\n?/g,'\n').split('\n'),stack=[parent];let paragraph=[];
+  const current=()=>stack[stack.length-1];
+  const flush=()=>{if(paragraph.length){const p=node('p');inline(p,paragraph.join('\n'));current().append(p);paragraph=[];}};
+  const cells=line=>line.trim().replace(/^\|/,'').replace(/\|$/,'').split('|').map(x=>x.trim());
+  for(let i=0;i<lines.length;i++){
+    const line=lines[i],fence=line.match(/^\s*(`{3,}|~{3,})(.*)$/);
+    if(fence){flush();const code=[];const close=new RegExp('^\\s*'+fence[1][0]+'{'+fence[1].length+',}\\s*$');while(i+1<lines.length&&!close.test(lines[i+1]))code.push(lines[++i]);if(i+1<lines.length)i++;const pre=node('pre');pre.append(node('code',code.join('\n')));current().append(pre);continue;}
+    if(/^\s*<details(?: open)?>\s*$/.test(line)){flush();const d=node('details');if(line.includes(' open'))d.open=true;current().append(d);stack.push(d);continue;}
+    if(/^\s*<\/details>\s*$/.test(line)){flush();if(stack.length>1)stack.pop();else current().append(node('p',line));continue;}
+    const summary=line.match(/^\s*<summary>(.*?)<\/summary>\s*$/);if(summary&&stack.length>1){flush();const s=node('summary');inline(s,summary[1]);current().append(s);continue;}
+    const heading=line.match(/^(#{1,6})\s+(.+)$/);if(heading){flush();const h=node('h'+heading[1].length);inline(h,heading[2]);current().append(h);continue;}
+    if(i+1<lines.length&&line.includes('|')&&/^\s*\|?\s*:?-{3,}:?\s*(\|\s*:?-{3,}:?\s*)+\|?\s*$/.test(lines[i+1])){
+      flush();const table=node('table'),head=node('tr');for(const x of cells(line)){const th=node('th');inline(th,x);head.append(th);}table.append(head);i++;
+      while(i+1<lines.length&&lines[i+1].includes('|')&&lines[i+1].trim()){const tr=node('tr');for(const x of cells(lines[++i])){const td=node('td');inline(td,x);tr.append(td);}table.append(tr);}current().append(table);continue;
+    }
+    const list=line.match(/^\s*(?:([-*])|\d+\.)\s+(.+)$/);if(list){flush();const tag=list[1]?'ul':'ol',group=node(tag);let entry=list;
+      while(entry){const li=node('li');inline(li,entry[2]);group.append(li);const next=(lines[i+1]||'').match(/^\s*(?:([-*])|\d+\.)\s+(.+)$/);if(!next||(next[1]?'ul':'ol')!==tag)break;i++;entry=next;}current().append(group);continue;}
+    if(/^>\s?/.test(line)){flush();const q=node('blockquote');inline(q,line.replace(/^>\s?/,''));current().append(q);continue;}
+    if(!line.trim()){flush();continue;}paragraph.push(line);
+  }flush();
+}
+function activeField(){return selected?.fields[fieldIndex];}
+function copyable(){return selected&&['new_issue','existing_issue_comment'].includes(selected.action.type)&&!['excluded','merged'].includes(selected.finding.status);}
+function visibleRows(){const q=el('search').value.trim().toLowerCase();return REVIEW.cards.filter(x=>
+  (el('actionfilter').value==='all'||x.action.type===el('actionfilter').value)&&
+  (el('coveragefilter').value==='all'||x.upstream.coverage===el('coveragefilter').value)&&
+  (el('relationfilter').value==='all'||x.upstream.relation===el('relationfilter').value)&&
+  (el('reprofilter').value==='all'||x.reproduction.status===el('reprofilter').value)&&
+  (el('kindfilter').value==='all'||x.kind===el('kindfilter').value)&&
+  (el('todofilter').value==='all'||(el('todofilter').value==='pending'?x.readiness.status==='needs_work':x.readiness.status==='prepared_for_human_review'))&&
+  (!q||[x.id,x.title,x.kind,x.finding.reason,x.action.reason,...x.material_ids].join(' ').toLowerCase().includes(q)));}
+function renderQueue(){const rows=visibleRows();el('queue').replaceChildren();el('count').textContent=rows.length+' / '+REVIEW.cards.length+' 条处置记录';for(const x of rows){const b=node('button');b.className='queue-item'+(selected?.id===x.id?' active':'');b.setAttribute('data-action',x.action.type);b.append(node('strong',(reviewed[x.id]?'✓ ':'')+x.title),node('small',x.id+' · '+label(x.action.type)),node('small',label(x.reproduction.status)+' · '+label(x.upstream.coverage)));b.onclick=()=>selectIssue(x.id);el('queue').append(b);}el('main').hidden=!rows.length;el('empty').hidden=!!rows.length;if(rows.length&&(!selected||!rows.some(x=>x.id===selected.id)))selectIssue(rows[0].id,false);}
+function selectIssue(id,redraw=true){
+  selected=byId.get(id);fieldIndex=0;mode='field';el('identity').textContent=id+(selected.material_ids.length?' / '+selected.material_ids.join(', '):'');el('title').textContent=selected.title;
+  el('states').textContent='复现：'+label(selected.reproduction.status)+'；上游关系：'+label(selected.upstream.relation)+'；证据判断：'+label(selected.finding.status);
+  el('finding').textContent=selected.finding.reason;el('processed').checked=!!reviewed[id];el('actionlabel').textContent=label(selected.action.type)+(selected.action.inferred?'（旧格式推导，待核实）':'');el('actionreason').textContent=selected.action.reason;
+  const target=externalURL(selected.action.target_url);el('target').hidden=!target;el('target').href=target||'#';
+  el('integrity').textContent=REVIEW.coverage.verified?'结构、哈希与关联通过':'旧格式；新版关联未核验';el('formlabel').textContent=selected.action.type==='existing_issue_comment'?'补充评论':'投稿字段';el('formstate').textContent=selected.fields.length?(selected.readiness.form_complete?'必需字段已提供':'仍有缺项'):'本条无需填写表单';
+  el('todostate').textContent=selected.readiness.pending_todos?selected.readiness.pending_todos+' 项待处理':selected.readiness.status==='needs_work'?'内容仍需整理':selected.readiness.status==='archive'?'无需投稿；可复核处置':'请人工决定是否提交';
+  el('blockers').textContent=selected.blockers.join('\n');el('blockers').hidden=!selected.blockers.length;el('quality').textContent=[...selected.quality_warnings,...selected.review_notices].join('\n');el('quality').hidden=!(selected.quality_warnings.length+selected.review_notices.length);
+  el('todos').replaceChildren();for(const t of selected.submission_todos){const d=node('div');d.append(node('p',(t.state==='done'?'已处理：':t.state==='not_applicable'?'不适用：':'待处理：')+t.label));for(const ref of t.basis||[])d.append(node('p','政策依据：'+ref.path));el('todos').append(d);}if(!selected.submission_todos.length)el('todos').append(node('p','未登记额外提交待办；仍需操作者审阅。'));el('todopanel').open=selected.readiness.pending_todos>0;
+  el('copytitle').disabled=!copyable()||selected.action.type!=='new_issue';el('formpanel').hidden=!selected.fields.length;el('archivenote').hidden=!!selected.fields.length;
+  el('template').textContent=selected.action.type==='existing_issue_comment'?'补充评论草稿；不套用新建 issue 表单。':'模板：'+selected.template_name+' · '+selected.template_id;
+  const source=selected.template_source||{},url=externalURL(source.url);el('templatesource').hidden=!url||selected.action.type!=='new_issue';el('templatesource').href=url||'#';el('templatelimit').textContent=source.limitation||'';el('templatelimit').hidden=!source.limitation;
+  el('fieldselect').replaceChildren();selected.fields.forEach((f,i)=>{const o=node('option',f.label+(f.required?' · 必填':''));o.value=String(i);el('fieldselect').append(o);});
+  el('instructions').replaceChildren();for(const instruction of selected.instructions){const d=node('div');renderMarkdown(d,instruction.text);el('instructions').append(d);}el('instructionpanel').hidden=!selected.instructions.length;
+  el('legacypanel').hidden=!selected.legacy_body;el('legacybody').textContent=selected.legacy_body||'';renderEvidence();updateContent();if(redraw)renderQueue();
+}
+function updateContent(){
+  const f=activeField();el('typed').replaceChildren();if(!f){el('content').value='';el('preview').replaceChildren();el('copyfield').disabled=true;el('copyview').disabled=true;return;}
+  el('fieldselect').value=String(fieldIndex);el('fieldmeta').textContent='用途：'+f.purpose+(f.required?'；必填':'；可选');el('description').textContent=f.description||'';const text=mode==='body'?selected.body:f.text;el('content').value=text;el('content').setAttribute('aria-label',mode==='body'?'完整正文':f.label);
+  el('copyfield').disabled=!copyable()||!f.text||!['input','textarea','dropdown','checkboxes','upload'].includes(f.type);el('copyview').disabled=!copyable()||!text||(mode==='field'&&el('copyfield').disabled);
+  el('content').hidden=view!=='raw';el('preview').hidden=view!=='preview';el('fieldtab').setAttribute('aria-pressed',String(mode==='field'));el('bodytab').setAttribute('aria-pressed',String(mode==='body'));el('previewtab').setAttribute('aria-pressed',String(view==='preview'));el('rawtab').setAttribute('aria-pressed',String(view==='raw'));
+  if(mode==='field'&&f.render){el('preview').replaceChildren(node('pre',text));}else renderMarkdown(el('preview'),text);
+  if(f.type==='input'){const input=node('input');input.type='text';input.readOnly=true;input.value=f.text;input.setAttribute('aria-label',f.label);el('typed').append(input);}
+  if(f.type==='dropdown'){const select=node('select');select.multiple=!!f.multiple;select.disabled=true;if(!f.multiple){const blank=node('option','未填写');blank.value='';select.append(blank);}const values=Array.isArray(f.value)?f.value:[f.value];for(const value of f.options||[]){const o=node('option',value);o.value=value;o.selected=values.includes(value);select.append(o);}el('typed').append(select);}
+  if(f.type==='checkboxes'){const box=node('div');box.className='selection-options';for(const option of f.options||[]){const l=node('label'),input=node('input');input.type='checkbox';input.disabled=true;input.checked=(f.value||[]).includes(option.label);l.append(input,node('span',option.label+(option.required?'（需操作者确认）':'')));box.append(l);}el('typed').append(box);}
+  if(f.type==='upload')el('typed').append(node('p','附件清单仅供核对；请在官方表单中手动上传。'));
+  if(!['input','textarea','dropdown','checkboxes','upload'].includes(f.type))el('typed').append(node('p','此控件需要人工处理。'));
+}
+function renderEvidence(){
+  el('criterion').textContent=selected.reproduction.reason;el('runs').replaceChildren();if(selected.reproduction.criterion_ref)el('runs').append(node('p','冻结判据：'+selected.reproduction.criterion_ref.path));if(selected.criterion_data){const c=selected.criterion_data;el('runs').append(node('p','目标现象：'+c.symptom),node('p','预期行为：'+c.expected_behavior));for(const m of c.metrics||[])el('runs').append(node('p','指标 '+m.name+'（'+m.unit+'）：'+m.definition+'；测量范围：'+m.scope));}
+  for(const run of selected.runs){const d=node('details'),a=run.assessment;d.append(node('summary',(run.selected?'选定运行 · ':'历史／未登记选定关联 · ')+run.id+' · '+label(run.execution_status)+' · '+run.environment.library.name+' '+run.environment.library.version));if(a)d.append(node('p','现象判断：'+label(a.outcome)+'；'+a.reason));
+    d.append(node('pre',JSON.stringify({command:run.command,environment:run.environment,source:run.source,limits:run.limits},null,2)));for(const name of ['source','stdout','stderr'])d.append(node('strong',name),node('pre',run[name+'_text']||'（空）'));
+    const b=node('button','复制原始证据源码');b.onclick=()=>copy(run.source_text||'','原始证据源码');d.append(b);el('runs').append(d);}
+  el('upstream').textContent=label(selected.upstream.relation)+'；'+label(selected.upstream.coverage)+'。'+selected.upstream.reason;
+  if(selected.upstream.stop_reason)el('upstream').textContent+=' 停止原因：'+selected.upstream.stop_reason;
+  el('matches').replaceChildren();for(const m of selected.upstream.matches||[]){const d=node('div');d.className='match';const url=externalURL(m.url);if(url){const a=node('a',m.title||m.url);a.href=url;a.target='_blank';a.rel='noopener noreferrer';d.append(a);}d.append(node('p','与本次请求的关系：'+label(m.relation||'unknown')+'；'+(m.claim_comparison||m.reason)),node('p','触发条件：'+m.trigger_comparison));if(m.mechanism_relation)d.append(node('p','运行时机制：'+label(m.mechanism_relation)));if(m.fix_scope)d.append(node('p','实际修改范围：'+(typeof m.fix_scope==='string'?m.fix_scope:m.fix_scope.summary)));if(m.tracker_state||m.release_inclusion)d.append(node('pre',JSON.stringify({tracker_state:m.tracker_state,release_inclusion:m.release_inclusion},null,2)));el('matches').append(d);}
+  el('requests').replaceChildren();const requests=REVIEW.pending_requests.filter(r=>r.issue_ids.includes(selected.id));for(const r of requests)el('requests').append(node('p',r.question));el('requestpanel').hidden=!requests.length;
+}
+let toastTimer;
+function toast(message){el('toast').textContent=message;el('toast').hidden=false;clearTimeout(toastTimer);toastTimer=setTimeout(()=>el('toast').hidden=true,2500);}
+async function copy(text,name){try{let written=false;if(navigator.clipboard&&window.isSecureContext){try{await navigator.clipboard.writeText(text);written=true;}catch(e){}}if(!written){const t=node('textarea');t.value=text;t.style.position='fixed';t.style.left='-10000px';document.body.append(t);t.select();const ok=document.execCommand('copy');t.remove();if(!ok)throw Error('clipboard unavailable');}toast(name+'已复制');}catch(e){el('formpanel').hidden=false;el('content').hidden=false;el('content').value=text;el('content').focus();el('content').select();toast('内容已选中，请按 Ctrl+C。');}}
+el('copytitle').onclick=()=>!el('copytitle').disabled&&copy(selected.title,'标题草稿');el('copyfield').onclick=()=>!el('copyfield').disabled&&copy(activeField().text,activeField().label+'草稿');el('copyview').onclick=()=>!el('copyview').disabled&&copy(el('content').value,'当前视图草稿');
+el('fieldselect').onchange=()=>{fieldIndex=Number(el('fieldselect').value);mode='field';updateContent();};el('fieldtab').onclick=()=>{mode='field';updateContent();};el('bodytab').onclick=()=>{mode='body';updateContent();};el('previewtab').onclick=()=>{view='preview';updateContent();};el('rawtab').onclick=()=>{view='raw';updateContent();};
+el('processed').onchange=()=>{if(!selected)return;reviewed[selected.id]=el('processed').checked;try{localStorage.setItem(storageKey,JSON.stringify(reviewed));}catch(e){}renderQueue();};
+for(const [id,getter]of [['actionfilter',x=>x.action.type],['coveragefilter',x=>x.upstream.coverage],['relationfilter',x=>x.upstream.relation],['reprofilter',x=>x.reproduction.status],['kindfilter',x=>x.kind]]){for(const value of [...new Set(REVIEW.cards.map(getter))]){const o=node('option',label(value));o.value=value;el(id).append(o);}el(id).onchange=renderQueue;}
+el('todofilter').onchange=renderQueue;el('search').oninput=renderQueue;
+el('heading').textContent=REVIEW.library.name+' · Issue 材料审阅';el('subtitle').textContent=REVIEW.pending_requests.length?'有事项等待操作者回复；依赖这些事项的工作尚未完成。':'运行记录 '+REVIEW.run_id+'；逐项审阅后决定是否提交。';
+el('overview').textContent=REVIEW.cards.length+' 条处置记录 · '+REVIEW.counts.report_candidates+' 个新 issue 候选 · '+REVIEW.counts.followups+' 份已有 issue 补充 · '+REVIEW.counts.archives+' 条归档／待补证据记录';
+for(const text of [...REVIEW.validation_warnings,...REVIEW.review_limitations])el('limitations').append(node('p',text));el('limitations').append(node('p','复制草稿不代表已确认缺陷或首次发现；自动检查不代替语义判断和人工审核。'));renderQueue();
+</script>
+</html>

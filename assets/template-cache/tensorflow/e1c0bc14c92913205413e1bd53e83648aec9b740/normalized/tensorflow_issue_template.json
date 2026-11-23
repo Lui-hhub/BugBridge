@@ -1,0 +1,534 @@
+{
+  "id": "tensorflow_issue_template",
+  "name": "TensorFlow Issue Template",
+  "format": "github_form",
+  "description": "Use this template to report TensorFlow-related issues",
+  "title_default": "",
+  "fields": [
+    {
+      "id": "issue-type",
+      "source_id": "issue-type",
+      "source_index": 0,
+      "type": "dropdown",
+      "label": "Issue type",
+      "description": "What type of issue would you like to report?",
+      "purpose": "other",
+      "required": true,
+      "validations": {
+        "required": true
+      },
+      "options": [
+        "Bug",
+        "Build/Install",
+        "Performance",
+        "Support",
+        "Feature Request",
+        "Documentation Feature Request",
+        "Documentation Bug",
+        "Others"
+      ],
+      "multiple": false,
+      "default": "",
+      "default_index": null,
+      "placeholder": "",
+      "render": null,
+      "raw": {
+        "type": "dropdown",
+        "id": "issue-type",
+        "attributes": {
+          "label": "Issue type",
+          "description": "What type of issue would you like to report?",
+          "multiple": false,
+          "options": [
+            "Bug",
+            "Build/Install",
+            "Performance",
+            "Support",
+            "Feature Request",
+            "Documentation Feature Request",
+            "Documentation Bug",
+            "Others"
+          ]
+        },
+        "validations": {
+          "required": true
+        }
+      },
+      "purpose_reason": "Assigned from this cached control label and description; What type of issue would you like to report?"
+    },
+    {
+      "id": "element-2",
+      "source_id": null,
+      "source_index": 1,
+      "type": "markdown",
+      "label": "Template instructions",
+      "description": "",
+      "purpose": "instruction",
+      "required": false,
+      "validations": {},
+      "options": [],
+      "multiple": false,
+      "default": "Please make sure that this is a bug. As per our [GitHub Policy](https://github.com/tensorflow/tensorflow/blob/master/ISSUES.md), we only address code/doc bugs, performance issues, feature requests and build/installation issues on GitHub.\n",
+      "default_index": null,
+      "placeholder": "",
+      "render": null,
+      "raw": {
+        "type": "markdown",
+        "attributes": {
+          "value": "Please make sure that this is a bug. As per our [GitHub Policy](https://github.com/tensorflow/tensorflow/blob/master/ISSUES.md), we only address code/doc bugs, performance issues, feature requests and build/installation issues on GitHub.\n"
+        }
+      }
+    },
+    {
+      "id": "tf-nightly",
+      "source_id": "tf-nightly",
+      "source_index": 2,
+      "type": "dropdown",
+      "label": "Have you reproduced the bug with TensorFlow Nightly?",
+      "description": "It is strongly suggested that you reproduce the bug with [TensorFlow Nightly](https://www.tensorflow.org/install/pip#nightly)",
+      "purpose": "environment",
+      "required": true,
+      "validations": {
+        "required": true
+      },
+      "options": [
+        "Yes",
+        "No"
+      ],
+      "multiple": false,
+      "default": "",
+      "default_index": null,
+      "placeholder": "",
+      "render": null,
+      "raw": {
+        "type": "dropdown",
+        "id": "tf-nightly",
+        "attributes": {
+          "label": "Have you reproduced the bug with TensorFlow Nightly?",
+          "description": "It is strongly suggested that you reproduce the bug with [TensorFlow Nightly](https://www.tensorflow.org/install/pip#nightly)",
+          "options": [
+            "Yes",
+            "No"
+          ]
+        },
+        "validations": {
+          "required": true
+        }
+      },
+      "purpose_reason": "Assigned from this cached control label and description; It is strongly suggested that you reproduce the bug with [TensorFlow Nightly](https://www.tensorflow.org/install/pip#nightly)"
+    },
+    {
+      "id": "element-4",
+      "source_id": null,
+      "source_index": 3,
+      "type": "markdown",
+      "label": "Template instructions",
+      "description": "",
+      "purpose": "instruction",
+      "required": false,
+      "validations": {},
+      "options": [],
+      "multiple": false,
+      "default": "You can collect some of this information using our [environment capture script](https://github.com/tensorflow/tensorflow/tree/master/tools/tf_env_collect.sh). You can also obtain the TensorFlow version with the following: <br> 1. TensorFlow 1.0: `python -c \"import tensorflow as tf; print(tf.GIT_VERSION, tf.VERSION)\"` <br>2. TensorFlow 2.0: `python -c \"import tensorflow as tf; print(tf.version.GIT_VERSION, tf.version.VERSION)\"`\n",
+      "default_index": null,
+      "placeholder": "",
+      "render": null,
+      "raw": {
+        "type": "markdown",
+        "attributes": {
+          "value": "You can collect some of this information using our [environment capture script](https://github.com/tensorflow/tensorflow/tree/master/tools/tf_env_collect.sh). You can also obtain the TensorFlow version with the following: <br> 1. TensorFlow 1.0: `python -c \"import tensorflow as tf; print(tf.GIT_VERSION, tf.VERSION)\"` <br>2. TensorFlow 2.0: `python -c \"import tensorflow as tf; print(tf.version.GIT_VERSION, tf.version.VERSION)\"`\n"
+        }
+      }
+    },
+    {
+      "id": "source",
+      "source_id": "source",
+      "source_index": 4,
+      "type": "dropdown",
+      "label": "Source",
+      "description": "TensorFlow installed from",
+      "purpose": "environment",
+      "required": true,
+      "validations": {
+        "required": true
+      },
+      "options": [
+        "source",
+        "binary"
+      ],
+      "multiple": false,
+      "default": "",
+      "default_index": null,
+      "placeholder": "",
+      "render": null,
+      "raw": {
+        "type": "dropdown",
+        "id": "source",
+        "attributes": {
+          "label": "Source",
+          "description": "TensorFlow installed from",
+          "options": [
+            "source",
+            "binary"
+          ]
+        },
+        "validations": {
+          "required": true
+        }
+      },
+      "purpose_reason": "Assigned from this cached control label and description; TensorFlow installed from"
+    },
+    {
+      "id": "tfversion",
+      "source_id": "tfversion",
+      "source_index": 5,
+      "type": "input",
+      "label": "TensorFlow version",
+      "description": "",
+      "purpose": "environment",
+      "required": true,
+      "validations": {
+        "required": true
+      },
+      "options": [],
+      "multiple": false,
+      "default": "",
+      "default_index": null,
+      "placeholder": "e.g., tf 2.8",
+      "render": null,
+      "raw": {
+        "type": "input",
+        "id": "tfversion",
+        "attributes": {
+          "label": "TensorFlow version",
+          "placeholder": "e.g., tf 2.8"
+        },
+        "validations": {
+          "required": true
+        }
+      },
+      "purpose_reason": "Assigned from this cached control label and description; "
+    },
+    {
+      "id": "Code",
+      "source_id": "Code",
+      "source_index": 6,
+      "type": "dropdown",
+      "label": "Custom code",
+      "description": "",
+      "purpose": "other",
+      "required": true,
+      "validations": {
+        "required": true
+      },
+      "options": [
+        "Yes",
+        "No"
+      ],
+      "multiple": false,
+      "default": "",
+      "default_index": null,
+      "placeholder": "",
+      "render": null,
+      "raw": {
+        "type": "dropdown",
+        "id": "Code",
+        "attributes": {
+          "label": "Custom code",
+          "options": [
+            "Yes",
+            "No"
+          ]
+        },
+        "validations": {
+          "required": true
+        }
+      },
+      "purpose_reason": "Assigned from this cached control label and description; "
+    },
+    {
+      "id": "OS",
+      "source_id": "OS",
+      "source_index": 7,
+      "type": "input",
+      "label": "OS platform and distribution",
+      "description": "",
+      "purpose": "environment",
+      "required": false,
+      "validations": {},
+      "options": [],
+      "multiple": false,
+      "default": "",
+      "default_index": null,
+      "placeholder": "e.g., Linux Ubuntu 16.04",
+      "render": null,
+      "raw": {
+        "type": "input",
+        "id": "OS",
+        "attributes": {
+          "label": "OS platform and distribution",
+          "placeholder": "e.g., Linux Ubuntu 16.04"
+        }
+      },
+      "purpose_reason": "Assigned from this cached control label and description; "
+    },
+    {
+      "id": "Mobile",
+      "source_id": "Mobile",
+      "source_index": 8,
+      "type": "input",
+      "label": "Mobile device",
+      "description": "",
+      "purpose": "environment",
+      "required": false,
+      "validations": {},
+      "options": [],
+      "multiple": false,
+      "default": "",
+      "default_index": null,
+      "placeholder": "e.g., Linux Ubuntu 16.04",
+      "render": null,
+      "raw": {
+        "type": "input",
+        "id": "Mobile",
+        "attributes": {
+          "label": "Mobile device",
+          "placeholder": "e.g., Linux Ubuntu 16.04"
+        }
+      },
+      "purpose_reason": "Assigned from this cached control label and description; "
+    },
+    {
+      "id": "Python",
+      "source_id": "Python",
+      "source_index": 9,
+      "type": "input",
+      "label": "Python version",
+      "description": "",
+      "purpose": "environment",
+      "required": false,
+      "validations": {},
+      "options": [],
+      "multiple": false,
+      "default": "",
+      "default_index": null,
+      "placeholder": "e.g., 3.9",
+      "render": null,
+      "raw": {
+        "type": "input",
+        "id": "Python",
+        "attributes": {
+          "label": "Python version",
+          "placeholder": "e.g., 3.9"
+        }
+      },
+      "purpose_reason": "Assigned from this cached control label and description; "
+    },
+    {
+      "id": "Bazel",
+      "source_id": "Bazel",
+      "source_index": 10,
+      "type": "input",
+      "label": "Bazel version",
+      "description": "If compiling from source",
+      "purpose": "environment",
+      "required": false,
+      "validations": {},
+      "options": [],
+      "multiple": false,
+      "default": "",
+      "default_index": null,
+      "placeholder": "",
+      "render": null,
+      "raw": {
+        "type": "input",
+        "id": "Bazel",
+        "attributes": {
+          "label": "Bazel version",
+          "description": "If compiling from source"
+        }
+      },
+      "purpose_reason": "Assigned from this cached control label and description; If compiling from source"
+    },
+    {
+      "id": "Compiler",
+      "source_id": "Compiler",
+      "source_index": 11,
+      "type": "input",
+      "label": "GCC/compiler version",
+      "description": "If compiling from source",
+      "purpose": "environment",
+      "required": false,
+      "validations": {},
+      "options": [],
+      "multiple": false,
+      "default": "",
+      "default_index": null,
+      "placeholder": "",
+      "render": null,
+      "raw": {
+        "type": "input",
+        "id": "Compiler",
+        "attributes": {
+          "label": "GCC/compiler version",
+          "description": "If compiling from source"
+        }
+      },
+      "purpose_reason": "Assigned from this cached control label and description; If compiling from source"
+    },
+    {
+      "id": "Cuda",
+      "source_id": "Cuda",
+      "source_index": 12,
+      "type": "input",
+      "label": "CUDA/cuDNN version",
+      "description": "",
+      "purpose": "environment",
+      "required": false,
+      "validations": {},
+      "options": [],
+      "multiple": false,
+      "default": "",
+      "default_index": null,
+      "placeholder": "",
+      "render": null,
+      "raw": {
+        "type": "input",
+        "id": "Cuda",
+        "attributes": {
+          "label": "CUDA/cuDNN version"
+        }
+      },
+      "purpose_reason": "Assigned from this cached control label and description; "
+    },
+    {
+      "id": "Gpu",
+      "source_id": "Gpu",
+      "source_index": 13,
+      "type": "input",
+      "label": "GPU model and memory",
+      "description": "If compiling from source",
+      "purpose": "environment",
+      "required": false,
+      "validations": {},
+      "options": [],
+      "multiple": false,
+      "default": "",
+      "default_index": null,
+      "placeholder": "",
+      "render": null,
+      "raw": {
+        "type": "input",
+        "id": "Gpu",
+        "attributes": {
+          "label": "GPU model and memory",
+          "description": "If compiling from source"
+        }
+      },
+      "purpose_reason": "Assigned from this cached control label and description; If compiling from source"
+    },
+    {
+      "id": "what-happened",
+      "source_id": "what-happened",
+      "source_index": 14,
+      "type": "textarea",
+      "label": "Current behavior?",
+      "description": "Also tell us, what did you expect to happen?",
+      "purpose": "problem",
+      "required": true,
+      "validations": {
+        "required": true
+      },
+      "options": [],
+      "multiple": false,
+      "default": "",
+      "default_index": null,
+      "placeholder": "Tell us what you see!",
+      "render": null,
+      "raw": {
+        "type": "textarea",
+        "id": "what-happened",
+        "attributes": {
+          "label": "Current behavior?",
+          "description": "Also tell us, what did you expect to happen?",
+          "placeholder": "Tell us what you see!"
+        },
+        "validations": {
+          "required": true
+        }
+      },
+      "purpose_reason": "Assigned from this cached control label and description; Also tell us, what did you expect to happen?"
+    },
+    {
+      "id": "code-to-reproduce",
+      "source_id": "code-to-reproduce",
+      "source_index": 15,
+      "type": "textarea",
+      "label": "Standalone code to reproduce the issue",
+      "description": "Provide a reproducible test case that is the bare minimum necessary to generate the problem. Please share a link to Colab, Jupyter, or any notebook.",
+      "purpose": "reproducer",
+      "required": true,
+      "validations": {
+        "required": true
+      },
+      "options": [],
+      "multiple": false,
+      "default": null,
+      "default_index": null,
+      "placeholder": "Tell us what you see!",
+      "render": "shell",
+      "raw": {
+        "type": "textarea",
+        "id": "code-to-reproduce",
+        "attributes": {
+          "label": "Standalone code to reproduce the issue",
+          "description": "Provide a reproducible test case that is the bare minimum necessary to generate the problem. Please share a link to Colab, Jupyter, or any notebook.",
+          "placeholder": "Tell us what you see!",
+          "value": null,
+          "render": "shell"
+        },
+        "validations": {
+          "required": true
+        }
+      },
+      "purpose_reason": "Assigned from this cached control label and description; Provide a reproducible test case that is the bare minimum necessary to generate the problem. Please share a link to Colab, Jupyter, or any notebook."
+    },
+    {
+      "id": "logs",
+      "source_id": "logs",
+      "source_index": 16,
+      "type": "textarea",
+      "label": "Relevant log output",
+      "description": "Please copy and paste any relevant log output. This will be automatically formatted into code, so no need for backticks.",
+      "purpose": "observed",
+      "required": false,
+      "validations": {},
+      "options": [],
+      "multiple": false,
+      "default": "",
+      "default_index": null,
+      "placeholder": "",
+      "render": "shell",
+      "raw": {
+        "type": "textarea",
+        "id": "logs",
+        "attributes": {
+          "label": "Relevant log output",
+          "description": "Please copy and paste any relevant log output. This will be automatically formatted into code, so no need for backticks.",
+          "render": "shell"
+        }
+      },
+      "purpose_reason": "Assigned from this cached control label and description; Please copy and paste any relevant log output. This will be automatically formatted into code, so no need for backticks."
+    }
+  ],
+  "source": {
+    "path": "tensorflow/e1c0bc14c92913205413e1bd53e83648aec9b740/raw/tensorflow_issue_template.yaml",
+    "sha256": "d789d6e2fd6a41ab35751247f8fae9569d2b8d39d91a8431d447b2a6fe3c5703",
+    "url": "https://github.com/tensorflow/tensorflow/blob/e1c0bc14c92913205413e1bd53e83648aec9b740/.github/ISSUE_TEMPLATE/tensorflow_issue_template.yaml",
+    "revision": "e1c0bc14c92913205413e1bd53e83648aec9b740",
+    "retrieved_at": "2026-11-23T11:04:17.769022+00:00",
+    "status": "official",
+    "limitation": ""
+  },
+  "cache_notes": "Title plus 15 official controls. Show fixed values for four native dropdowns; the operator selects them on GitHub. Code/log copy payloads are raw text because render=shell adds formatting."
+}

@@ -1,0 +1,4 @@
+* text=auto eol=lf
+
+# Frozen templates and approved frontend files must retain their exact bytes.
+assets/** -text

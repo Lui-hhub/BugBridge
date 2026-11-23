@@ -1,0 +1,34 @@
+{
+  "id": "blank",
+  "name": "Blank Issue",
+  "format": "markdown",
+  "metadata": {
+    "raw_frontmatter": "name: Blank Issue\nabout: Are you sure other templates don't apply?\ntitle: ''\nlabels: ''\nassignees: ''"
+  },
+  "fields": [
+    {
+      "id": "body",
+      "source_id": null,
+      "type": "textarea",
+      "label": "Issue body",
+      "description": "Fill the original Markdown template, preserving its sections.",
+      "purpose": "body",
+      "required": true,
+      "validations": {
+        "required": true
+      },
+      "default": "**Before submitting, please review the [issue lifecycle](https://github.com/pytorch/pytorch/blob/main/CONTRIBUTING.md#issue-lifecycle) and [AI-Assisted Development](https://github.com/pytorch/pytorch/blob/main/AI_POLICY.md) policy. Issues that do not follow these practices will be automatically closed and users breaking these rules repeatedly may be banned.**\n"
+    }
+  ],
+  "title_default": "",
+  "source": {
+    "path": "pytorch/a7c9e15b4c4b205c87c765a0a799c39dfcfe5418/raw/blank.md",
+    "sha256": "92175fa91314bde465566b4f228f94985290a1de99ea6dfb97d7b066a1b35100",
+    "url": "https://github.com/pytorch/pytorch/blob/a7c9e15b4c4b205c87c765a0a799c39dfcfe5418/.github/ISSUE_TEMPLATE/blank.md",
+    "revision": "a7c9e15b4c4b205c87c765a0a799c39dfcfe5418",
+    "retrieved_at": "2026-11-23T11:04:17.769022+00:00",
+    "status": "official",
+    "limitation": ""
+  },
+  "cache_notes": ""
+}

@@ -1,0 +1,34 @@
+{
+  "id": "tflite-op-request",
+  "name": "TensorFlow Lite Op Request",
+  "format": "markdown",
+  "metadata": {
+    "raw_frontmatter": "name: TensorFlow Lite Op Request\nabout: Use this template for reporting Lite ops you are using or missing\nlabels: 'comp:lite'\n"
+  },
+  "fields": [
+    {
+      "id": "body",
+      "source_id": null,
+      "type": "textarea",
+      "label": "Issue body",
+      "description": "Fill the original Markdown template, preserving its sections.",
+      "purpose": "body",
+      "required": true,
+      "validations": {
+        "required": true
+      },
+      "default": "**System information**\n- OS Platform and Distribution (e.g., Linux Ubuntu 16.04):\n- TensorFlow installed from (source or binary):\n- TensorFlow version (or github SHA if from source):\n\n\n**Provide the text output from tflite_convert**\n\n```\n# Copy and paste here\n```\n\n**Standalone code to reproduce the issue** \nProvide a reproducible test case that is the bare minimum necessary to generate\nthe problem. If possible, please share a link to Colab/Jupyter/any notebook.\n\nAlso, please include a link to a GraphDef or the model if possible.\n\n**Any other info / logs**\n\nInclude any logs or source code that would be helpful to diagnose the problem.\nIf including tracebacks, please include the full traceback. Large logs and files\nshould be attached.\n"
+    }
+  ],
+  "title_default": "",
+  "source": {
+    "path": "tensorflow/e1c0bc14c92913205413e1bd53e83648aec9b740/raw/tflite-op-request.md",
+    "sha256": "ba9df47540f93451d48ce864db1b3bf3d2b3dafe6e9ddf20440f2dd2f169a196",
+    "url": "https://github.com/tensorflow/tensorflow/blob/e1c0bc14c92913205413e1bd53e83648aec9b740/.github/ISSUE_TEMPLATE/tflite-op-request.md",
+    "revision": "e1c0bc14c92913205413e1bd53e83648aec9b740",
+    "retrieved_at": "2026-11-23T11:04:17.769022+00:00",
+    "status": "official",
+    "limitation": ""
+  },
+  "cache_notes": ""
+}

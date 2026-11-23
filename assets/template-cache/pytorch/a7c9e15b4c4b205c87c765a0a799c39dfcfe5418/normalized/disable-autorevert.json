@@ -1,0 +1,34 @@
+{
+  "id": "disable-autorevert",
+  "name": "D❌​🔙​ ISABLE AUTOREVERT",
+  "format": "markdown",
+  "metadata": {
+    "raw_frontmatter": "name: \"D❌​\\U0001F519​ ISABLE AUTOREVERT\"\nabout: Disables autorevert when open\ntitle: \"[DISABLE AUTOREVERT]\"\nlabels: ''\nassignees: ''\n"
+  },
+  "fields": [
+    {
+      "id": "body",
+      "source_id": null,
+      "type": "textarea",
+      "label": "Issue body",
+      "description": "Fill the original Markdown template, preserving its sections.",
+      "purpose": "body",
+      "required": true,
+      "validations": {
+        "required": true
+      },
+      "default": "> NOTE: Opening this issue does NOT disable autorevert on its own. A maintainer must\n>       manually add the `ci: disable-autorevert` label for it to take effect. The label is\n>       intentionally not auto-applied by this template, so only users with write/triage\n>       permission can trip the killswitch.\n\nThis issue, while open **and** labeled `ci: disable-autorevert`, disables the autorevert functionality.\n\nMore details can be found [here](https://github.com/pytorch/test-infra/blob/main/aws/lambda/pytorch-auto-revert/README.md)\n\n\n## Why are you disabling autorevert?\n\n\n## Links to any issues/commits/errors that shows the source of problem\n"
+    }
+  ],
+  "title_default": "[DISABLE AUTOREVERT]",
+  "source": {
+    "path": "pytorch/a7c9e15b4c4b205c87c765a0a799c39dfcfe5418/raw/disable-autorevert.md",
+    "sha256": "21b66fb6af7e908a1549f5f88156bab84928f5f0a0b3c90ecfa942bf5af3d88b",
+    "url": "https://github.com/pytorch/pytorch/blob/a7c9e15b4c4b205c87c765a0a799c39dfcfe5418/.github/ISSUE_TEMPLATE/disable-autorevert.md",
+    "revision": "a7c9e15b4c4b205c87c765a0a799c39dfcfe5418",
+    "retrieved_at": "2026-11-23T11:04:17.769022+00:00",
+    "status": "official",
+    "limitation": ""
+  },
+  "cache_notes": ""
+}
