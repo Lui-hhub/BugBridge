@@ -149,7 +149,11 @@ answers. Pending interaction permits an incomplete local draft, never completion
    run/criterion/code bindings, and freezes the compilation inputs. New service
    reports require this form_binding by default; semantic judgments remain
    analysis/human work. Serve the compiled pack as in
-   [service.md](references/service.md). Deliver its actual localhost URL. The main
+   [service.md](references/service.md). Every newly opened service port must expire
+   automatically 3 hours (10800 seconds) after startup, including background
+   services. Requests/reloads do not renew the deadline; do not automatically
+   restart expired services. Change the lifetime only at explicit operator request.
+   Deliver its actual localhost URL and printed expiry time. The main
    page shows only official copy payloads, fixed dropdown values and links. No local
    template controls, instruction panels, status dashboards, viewed checkboxes or
    field/view switches. Save successful-copy progress in SQLite, independently of
@@ -177,7 +181,9 @@ python scripts/serve_review.py /fresh/run/compiled/pack.json --state /stable/sta
 ```
 
 Use the actual run/state paths returned by workspace.py in the commands above.
-Keep the service running through handoff. In WSL, Windows Edge normally opens the
+Keep the service running through handoff within its fixed 3-hour lifetime; do not
+extend it just to keep an old URL alive. The service closes its port automatically,
+preserving materials and SQLite progress. In WSL, Windows Edge normally opens the
 localhost URL directly; do not give Linux file paths to Windows as if they were native
 paths. Convert file-only exports with wslpath when needed. No external deployment.
 Static review_pack.py export remains an optional backup, not the default product.
@@ -194,7 +200,8 @@ Account for all material IDs; resolve environment questions or obtain an explici
 skip. Keep finding support, reproduction, upstream relationships and submission
 readiness distinct in records. Human review still decides validity/submission;
 copying is only copying. Preserve historical artifacts. Report the live service URL,
-where progress is saved, and real-browser versus simulated validation limits.
+its expiry time, where progress is saved, and real-browser versus simulated
+validation limits.
 
 Run `python -m unittest discover -s tests -v` here. Tests use synthetic records and
 benign fixtures; target-library reproduction is a separate deliberate step.

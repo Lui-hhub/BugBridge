@@ -1,14 +1,17 @@
 """Local HTTP/persistence regressions, synthetic reports only."""
 import copy
+from datetime import datetime
 import json
 import os
 from pathlib import Path
 import shutil
 import signal
+import socket
 import subprocess
 import sys
 import tempfile
 import threading
+import time
 import unittest
 from urllib.error import HTTPError
 from urllib.request import Request, urlopen
@@ -16,7 +19,7 @@ from urllib.request import Request, urlopen
 from fixtures import SCRIPTS, form, make_pack, make_v2_pack, save
 from pack_v2 import QUALITY_CHECKS
 from review_pack import write_json
-from serve_review import ProgressStore, ReviewApplication, ReviewServer
+from serve_review import DEFAULT_TTL_SECONDS, ProgressStore, ReviewApplication, ReviewServer
 
 
 def service_pack(root):
@@ -36,9 +39,9 @@ class ServiceTests(unittest.TestCase):
         self.state=self.root/'separate-state/review.sqlite3'
         self.start()
 
-    def start(self):
+    def start(self, ttl_seconds=DEFAULT_TTL_SECONDS):
         self.app=ReviewApplication(self.path,self.state,allow_unbound_draft=True)
-        self.server=ReviewServer(('127.0.0.1',0),self.app)
+        self.server=ReviewServer(('127.0.0.1',0),self.app,ttl_seconds=ttl_seconds)
         self.thread=threading.Thread(target=lambda:self.server.serve_forever(poll_interval=.02),daemon=True)
         self.thread.start();self.url='http://127.0.0.1:'+str(self.server.server_port)
 
@@ -149,17 +152,95 @@ class ServiceTests(unittest.TestCase):
         self.assertIsNotNone(self.app.last_error)
         with self.assertRaises(ValueError):ReviewApplication(self.path,self.root/'other-state.sqlite3')
 
+    def test_default_lifetime_is_three_hours_and_invalid_lifetimes_are_rejected(self):
+        self.assertEqual(DEFAULT_TTL_SECONDS,10800)
+        self.assertEqual(self.server.ttl_seconds,10800)
+        self.assertEqual((self.server.expires_at-self.server.started_at).total_seconds(),10800)
+        for value in [0,-1,True,float('inf'),10**100]:
+            with self.subTest(value=value),self.assertRaises(ValueError):
+                ReviewServer(('127.0.0.1',0),self.app,ttl_seconds=value)
+
+    def test_expiry_releases_port_despite_requests_and_reload_and_keeps_progress(self):
+        self.stop();self.start(ttl_seconds=1)
+        item=self.get()['items'][1];field=item['fields'][0]
+        self.post('/api/copied',dict(issue_id=item['id'],key=field['key']))
+        self.post('/api/selection',dict(issue_id=item['id']))
+        port=self.server.server_port
+        self.pack['run_id']='reloaded-before-expiry';write_json(self.path,self.pack)
+        self.get()
+        self.assertEqual(self.app.pack['run_id'],'reloaded-before-expiry')
+        until=time.monotonic()+4
+        requests=0
+        while self.thread.is_alive() and time.monotonic()<until:
+            try:
+                self.get('/health');requests+=1
+            except OSError:
+                pass
+            self.thread.join(timeout=.03)
+        self.assertGreater(requests,1)
+        self.assertFalse(self.thread.is_alive(),'Requests or reload extended the service lifetime')
+        with self.assertRaises(OSError):socket.create_connection(('127.0.0.1',port),timeout=.2)
+        with ReviewServer(('127.0.0.1',port),self.app):
+            pass
+        self.start()
+        restored=self.get()
+        self.assertEqual(restored['selected_id'],item['id'])
+        self.assertTrue(restored['items'][1]['fields'][0]['copied'])
+
+    def test_foreground_service_exits_and_closes_port_at_deadline(self):
+        result=subprocess.run([sys.executable,str(SCRIPTS/'serve_review.py'),str(self.path),'--state',str(self.root/'foreground/state.sqlite3'),
+                               '--port','0','--ttl-seconds','1','--allow-unbound-draft'],capture_output=True,text=True,timeout=8)
+        self.assertEqual(result.returncode,0,result.stderr)
+        info=json.loads(result.stdout)
+        self.assertEqual(info['ttl_seconds'],1)
+        self.assertEqual((datetime.fromisoformat(info['expires_at'])-datetime.fromisoformat(info['started_at'])).total_seconds(),1)
+        with self.assertRaises(OSError):urlopen(info['url']+'/health',timeout=.2)
+
+    def test_cli_rejects_unlimited_or_invalid_lifetime(self):
+        for value in ['0','-1','never','inf',str(10**100)]:
+            with self.subTest(value=value):
+                result=subprocess.run([sys.executable,str(SCRIPTS/'serve_review.py'),str(self.path),'--ttl-seconds',value],
+                                      capture_output=True,text=True,timeout=5)
+                self.assertEqual(result.returncode,2)
+                self.assertIn('--ttl-seconds',result.stderr)
+                self.assertEqual(result.stdout,'')
+
     @unittest.skipUnless(os.name=='posix','POSIX cleanup for detached service test')
     def test_background_launcher_exits_while_service_remains_available(self):
         result=subprocess.run([sys.executable,str(SCRIPTS/'serve_review.py'),str(self.path),'--state',str(self.root/'background/state.sqlite3'),'--port','0','--background','--allow-unbound-draft'],capture_output=True,text=True,timeout=15)
         self.assertEqual(result.returncode,0,result.stderr)
         info=json.loads(result.stdout)
         try:
+            self.assertEqual(info['ttl_seconds'],10800)
+            self.assertEqual((datetime.fromisoformat(info['expires_at'])-datetime.fromisoformat(info['started_at'])).total_seconds(),10800)
             with urlopen(info['url']+'/api/review',timeout=3) as response:data=json.load(response)
             self.assertEqual(len(data['items']),3)
             self.assertTrue(Path(info['stdout_log']).is_file())
         finally:
             os.kill(info['pid'],signal.SIGTERM)
+
+    @unittest.skipUnless(os.name=='posix','POSIX cleanup for detached service test')
+    def test_background_service_uses_requested_lifetime_and_releases_port(self):
+        result=subprocess.run([sys.executable,str(SCRIPTS/'serve_review.py'),str(self.path),'--state',str(self.root/'expiring-background/state.sqlite3'),
+                               '--port','0','--background','--ttl-seconds','1','--allow-unbound-draft'],capture_output=True,text=True,timeout=8)
+        self.assertEqual(result.returncode,0,result.stderr)
+        info=json.loads(result.stdout)
+        try:
+            self.assertEqual(info['ttl_seconds'],1)
+            self.assertEqual((datetime.fromisoformat(info['expires_at'])-datetime.fromisoformat(info['started_at'])).total_seconds(),1)
+            with urlopen(info['url']+'/health',timeout=.5) as response:self.assertTrue(json.load(response)['ok'])
+            until=time.monotonic()+4
+            while time.monotonic()<until:
+                try:
+                    with urlopen(info['url']+'/health',timeout=.3) as response:response.read()
+                except OSError:
+                    break
+                time.sleep(.03)
+            else:
+                self.fail('Detached service did not release its port at expiry')
+        finally:
+            try:os.kill(info['pid'],signal.SIGTERM)
+            except ProcessLookupError:pass
 
     def test_cross_origin_or_non_json_mutation_is_rejected(self):
         field=self.get()['items'][0]['fields'][0];body=dict(issue_id='cli-case',key=field['key'])

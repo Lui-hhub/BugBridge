@@ -26,10 +26,33 @@ local form. A concise operator_note can identify the actual remaining author ste
 Use an existing interpreter with the YAML parser needed to recheck YAML snapshots.
 --allow-pending permits an explicitly incomplete service during actual pending
 questions; it does not authorize skipping environment interaction. Startup prints
-the actual URL, state path and available draft count. Port 0 selects an available
+the actual URL, state path, available draft count, `ttl_seconds`, `started_at` and
+`expires_at` (UTC ISO timestamps). Report the URL and expiry in the operator's
+timezone at handoff. Port 0 selects an available
 port, useful for tests; return the actual printed port. --background detaches it from the launching terminal and returns its PID/log
 paths, so completion of a tool command does not stop the service. Omit the flag
-for a foreground development process. Keep the process alive for handoff. Binding is local loopback; no hosting/deployment/account setup is needed.
+for a foreground development process. Keep the process alive for handoff within its
+fixed lifetime. Binding is local loopback; no hosting/deployment/account setup is needed.
+
+## Port lifetime
+
+Every new review-service port closes automatically after **3 hours (10800
+seconds)**, in both foreground and background mode. The deadline starts when the
+port opens, uses a monotonic clock, and does not slide when the page is used or a
+pack is reloaded. Expiry stops the server and releases the listening port. No page
+interaction or automatic restart extends that deadline.
+
+The CLI option `--ttl-seconds` accepts a positive integer for an explicitly
+operator-requested different lifetime or a short synthetic test. Zero/unlimited
+lifetimes are rejected; ordinary material jobs keep the 3-hour default. The
+background launcher passes this option to its detached child, which enforces its
+own deadline after the launcher exits. Other listeners are never stopped or
+replaced to reclaim a port.
+
+Expiration preserves report files, evidence and SQLite progress. Reopen an expired
+review on operator request by starting the same compiled pack with the same
+`--state` database; that new service gets its own deadline. Existing processes
+started before this feature retain their previous behavior until restarted.
 
 Default review state is .local/state/review.sqlite3 inside this checkout. It is
 ignored by Git and independent of the invoking shell's working directory. A new
@@ -89,7 +112,8 @@ Windows permission/security prompts to complete testing.
 
 ## Checks
 
-Tests cover the real local HTTP API, restart persistence, changed-field reset,
+Tests cover the real local HTTP API, foreground/background expiry and port release,
+fixed deadlines during requests/reloads, progress retention after expiry, restart persistence, changed-field reset,
 copy values, native-field ordering, hidden investigation details, partial failures
 and offline cache reuse. DOM emulation validates mechanics only. Inspect at least
 one ordinary bug, a documentation report and a Markdown/single-body form in an actual

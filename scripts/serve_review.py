@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
 """Local copy-only review service with SQLite progress. Never executes issue code."""
 import argparse
-from datetime import datetime, timezone
+from datetime import datetime, timedelta, timezone
 import hashlib
 import html
 from http.server import BaseHTTPRequestHandler, ThreadingHTTPServer
@@ -20,6 +20,15 @@ from pack_v2 import PLACEHOLDER
 from layout_guard import ensure_layout, SKILL_ROOT
 from review_pack import read_json, validate
 
+
+DEFAULT_TTL_SECONDS = 3 * 60 * 60
+
+
+def service_ttl_seconds(value):
+    seconds = int(value)
+    if not 0 < seconds <= threading.TIMEOUT_MAX:
+        raise argparse.ArgumentTypeError('Service lifetime must be positive and within the supported timer range.')
+    return seconds
 
 
 def digest(value):
@@ -229,9 +238,27 @@ class ReviewApplication:
 class ReviewServer(ThreadingHTTPServer):
     daemon_threads = True
 
-    def __init__(self, address, app):
+    def __init__(self, address, app, ttl_seconds=DEFAULT_TTL_SECONDS):
+        if not isinstance(ttl_seconds, int) or isinstance(ttl_seconds, bool) or not 0 < ttl_seconds <= threading.TIMEOUT_MAX:
+            raise ValueError('Service lifetime must be a positive integer within the supported timer range.')
         self.app = app
         super().__init__(address, Handler)
+        self.ttl_seconds = ttl_seconds
+        self.started_at = datetime.now(timezone.utc)
+        self.expires_at = self.started_at + timedelta(seconds=ttl_seconds)
+        self._deadline = time.monotonic() + ttl_seconds
+
+    def serve_forever(self, poll_interval=.5):
+        # shutdown() must run outside the serving thread. The monotonic deadline
+        # is fixed when the port is opened, independent of requests or reloads.
+        expiry = threading.Timer(max(0, self._deadline - time.monotonic()), self.shutdown)
+        expiry.daemon = True
+        expiry.start()
+        try:
+            super().serve_forever(poll_interval=poll_interval)
+        finally:
+            expiry.cancel()
+            self.server_close()
 
 
 class Handler(BaseHTTPRequestHandler):
@@ -328,6 +355,8 @@ def main():
     parser.add_argument('pack',type=Path)
     parser.add_argument('--state',type=Path,default=default_state_path())
     parser.add_argument('--port',type=int,default=8765)
+    parser.add_argument('--ttl-seconds',type=service_ttl_seconds,default=DEFAULT_TTL_SECONDS,
+                        help='Close the service after this many seconds from port creation (default: 10800, 3 hours)')
     parser.add_argument('--allow-pending',action='store_true')
     parser.add_argument('--allow-unbound-draft',action='store_true',help='Historical schema-2.0 compatibility only; normal jobs use compiled form bindings')
     parser.add_argument('--background',action='store_true',help='Detach the local service and print its actual URL/PID/log paths')
@@ -337,7 +366,8 @@ def main():
         logs.mkdir(parents=True,exist_ok=True)
         token=uuid.uuid4().hex[:12]
         stdout_path,stderr_path=logs/(token+'.stdout.txt'),logs/(token+'.stderr.txt')
-        command=[sys.executable,str(Path(__file__).resolve()),str(args.pack.resolve()),'--state',str(args.state.resolve()),'--port',str(args.port)]
+        command=[sys.executable,str(Path(__file__).resolve()),str(args.pack.resolve()),'--state',str(args.state.resolve()),'--port',str(args.port),
+                 '--ttl-seconds',str(args.ttl_seconds)]
         if args.allow_pending:
             command.append('--allow-pending')
         if args.allow_unbound_draft:
@@ -361,10 +391,11 @@ def main():
         parser.exit(1,'Local service did not finish startup; see '+str(stderr_path)+'\n')
     try:
         app = ReviewApplication(args.pack,args.state,args.allow_pending,args.allow_unbound_draft)
-        server = ReviewServer(('127.0.0.1',args.port),app)
+        server = ReviewServer(('127.0.0.1',args.port),app,ttl_seconds=args.ttl_seconds)
     except (OSError, ValueError) as exc:
         parser.exit(1,str(exc)+'\n')
-    print(json.dumps(dict(url='http://localhost:'+str(server.server_port),state=str(args.state.resolve()),ready=len(app.model['items'])),ensure_ascii=False),flush=True)
+    print(json.dumps(dict(url='http://localhost:'+str(server.server_port),state=str(args.state.resolve()),ready=len(app.model['items']),
+                          ttl_seconds=server.ttl_seconds,started_at=server.started_at.isoformat(),expires_at=server.expires_at.isoformat()),ensure_ascii=False),flush=True)
     try:
         server.serve_forever()
     except KeyboardInterrupt:

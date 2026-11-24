@@ -82,6 +82,9 @@ python -m unittest discover -s tests -v
 Routine checks use synthetic records and local HTTP fixtures. Framework installations
 and new defect reproductions are separate, explicit work. For WSL, open the returned
 localhost URL in Windows Edge; use an available port when another checkout is running.
+Each new review service closes its port automatically after 3 hours, including
+background services. The handoff includes its expiry time; report files and saved
+copy progress remain available for a later restart.
 
 See the [retrieval queue](references/retrieval-queue.md),
 [field composition](references/filling.md), [review service](references/service.md)

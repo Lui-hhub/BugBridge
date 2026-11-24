@@ -45,6 +45,12 @@ Review progress defaults to this checkout's .local/state/review.sqlite3. Queue s
 defaults to the machine's XDG state directory; scripts/workspace.py paths reports
 both. Start the service on the compiled pack and deliver its actual localhost URL.
 Do not replace an existing service on an occupied port; use an available port.
+Every newly opened review-service port has a fixed lifetime of 3 hours (10800
+seconds) from startup and must close automatically at expiry, including background
+services. Use the service's built-in deadline; requests, reloads and handoff do not
+renew it. Do not automatically restart expired services. Only use a different
+lifetime when the operator explicitly requests it. Report the printed expiry time
+with the localhost URL. Expiry preserves materials and SQLite copy progress.
 
 ## Maintaining this project
 
