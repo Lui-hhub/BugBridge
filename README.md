@@ -38,7 +38,9 @@ A global skill installation is not required.
   the operator for their location instead of triggering framework installations.
 - **Upstream retrieval:** an authenticated background GitHub queue after successful
   reproduction, with serial requests, rate-limit recovery, conditional caching
-  and evidence exports. The agent compares triggers and actual fix scope.
+  and complete evidence exports. An offline reader lists metadata first, records
+  candidate-selection reasons, and reads individual evidence items in bounded
+  ranges. The agent compares triggers and actual fix scope.
 - **Field-only composition:** the agent fills generated answer values. Validation
   rejects unknown fields/options, stale reviews and inconsistent evidence bindings.
 - **Human review:** a fixed local frontend with official-form links and separately

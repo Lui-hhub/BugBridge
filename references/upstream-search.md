@@ -124,6 +124,21 @@ Start with the most specific symptom: API/alias, relevant option, shape/dtype or
 backend, diagnostic/error wording. Expand toward shared mechanisms only as needed.
 Include past issues and relevant PRs, not only open issues.
 
+Keep collection and reading separate. The background queue preserves full search
+responses and retrieved detail evidence. Export supplies a metadata-only review
+index; use upstream_review.py to list it before choosing what to read. Inspect
+titles, IDs, state, query provenance and available sections, then record a concrete
+relevance reason for each chosen candidate. Title-term filtering assists navigation;
+an empty filtered list is not evidence that no related report exists.
+
+Read only the chosen record's needed body, individual comments and individual file
+patches, with explicit character ranges. Inspect additional ranges and nearby context
+when needed to understand the trigger, requested correction or fix. Do not traverse
+search JSON to print every item's body, dump entire HTML pages, or concatenate all
+comments/patches into a tool response. Full frozen evidence stays available on disk;
+this rule changes the normal reading interface, not the accuracy of reported defects.
+See [retrieval-queue.md](retrieval-queue.md#metadata-first-reading) for the commands.
+
 A reliable same-issue match ends broad novelty hunting for that claim. Inspect its
 requested remedy, actual trigger, duplicate routing, current state and linked patch
 scope. Resolve any material contradiction or nearby fix claim. A different symptom

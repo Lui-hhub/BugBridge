@@ -30,6 +30,10 @@ offline. Follow the main workflow for cache misses and environment discovery.
   documentation claims need established evidence. Use the shared GitHub queue and
   PAT-first authentication. Keep its machine-level default state across clones;
   separate per-clone queues must not multiply an account's request budget.
+- Review exported upstream evidence through scripts/upstream_review.py: list metadata,
+  record why a candidate is relevant, then read individual evidence items in bounded
+  ranges. Do not bulk-print search-result bodies, comments or patches into context.
+  Preserve complete raw exports; title filtering and excerpts never prove no match.
 - Missing/rejected credentials require an active operator notice. Ask for local
   configuration location/method, never the token in chat. Do not put tokens in
   task files, command arguments, Git, reports or frontend code.

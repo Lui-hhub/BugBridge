@@ -21,6 +21,7 @@ import uuid
 from github_http import (API_VERSION, SAFE_HEADERS, GitHubClient, Response, number,
                          resolve_credential, retry_decision, safe_text, validate_url)
 from review_pack import artifact, read_json, sha, validate, write_json
+from upstream_review import create_index
 
 DEFAULT_LIMITS = dict(max_pages=2, max_records=10, max_attempts=4, max_requests=100,
                       max_seconds=7200, cache_max_age_seconds=300)
@@ -541,12 +542,15 @@ class Queue:
                     tasks=tasks,queries=queries,records=records,sources=list(refs.values()),semantic_assessment_required=True,
                     notice='Retrieval evidence only; no automatic duplicate, novelty, fix-coverage or release-inclusion judgment.')
                 write_json(stage/'retrieval.json',snapshot)
+                create_index(stage/'retrieval.json',stage/'review-index.json')
             if output.exists():raise ValueError('Export output appeared during assembly')
             stage.rename(output)
         except BaseException:
             import shutil
             shutil.rmtree(stage,ignore_errors=True);raise
-        return dict(evidence=str(output/'retrieval.json'),state=snapshot['state'],records=len(records),assessment_required=True)
+        return dict(evidence=str(output/'retrieval.json'),review_index=str(output/'review-index.json'),
+                    state=snapshot['state'],records=len(records),assessment_required=True,
+                    notice='List review-index.json metadata, select relevant records with reasons, then read individual evidence items using upstream_review.py.')
 
 
 def work(queue,credential,once=False,idle_exit=30,client=None):

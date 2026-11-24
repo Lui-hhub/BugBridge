@@ -127,6 +127,13 @@ Export can preserve a partial or still-pending snapshot without presenting it as
 The export freezes retrieval evidence; the original reproduction evidence remains
 in the source pack, identified by the binding's hashes.
 
+Export also creates review-index.json, a derived metadata-only index bound to the
+exact retrieval.json hash. It contains record IDs, titles, state, query IDs and
+individual evidence-item references/counts, without body/comment/patch text. The
+export command returns its path rather than printing evidence. The index is a
+reading aid, not part of the raw snapshot's sources or a semantic judgment. Original
+response bytes and existing raw evidence references remain unchanged.
+
 The queries list supplies summaries for the existing upstream query contract. A
 query is marked complete conservatively only when the planned job succeeded without
 gaps; incomplete queries keep their checked_at null until any successful fetch.
@@ -134,11 +141,77 @@ When integrating an export nested in the pack root, prefix its local reference p
 with that export directory and register the frozen files in sources. Preserve the
 full retrieval snapshot; do not copy an envelope without its referenced body.
 
-LLM analysis must inspect the bodies and patches, compare trigger_comparison and
-claim_comparison, and fill upstream relation, coverage and PR state/fix/release
-evidence under [pack-contract.md](pack-contract.md). Retrieval success never assigns
-same_issue, no_match_in_scope or a report action automatically. A merged/closed PR
-is not proof of effective coverage or release inclusion.
+### Metadata-first reading
+
+Use scripts/upstream_review.py for normal agent analysis. It is offline, requires
+no credentials, and never enqueues or sends requests. Keep indexes and selection
+files beside their retrieval.json. Use a new filename for each revision; existing
+files are never overwritten. These are agent operations, not new human UI steps.
+
+1. List metadata before opening content. Results are paginated (20 records by
+   default, at most 100). Optional repeated --term arguments filter/rank **titles
+   only**; they do not read out body excerpts or establish semantic relevance.
+
+```bash
+python scripts/upstream_review.py list --index /fresh/run/upstream/JOB_ID/review-index.json
+python scripts/upstream_review.py list --index /fresh/run/upstream/JOB_ID/review-index.json --term API_NAME --offset 0 --limit 20
+```
+
+2. Select one record using its returned ID (issue:NUMBER or pull_request:NUMBER).
+   Explain why its API, trigger or requested correction warrants inspection for the
+   bound claim. This is an agent relevance decision, not human confirmation. The
+   selection binds the exact index/snapshot hashes and preserves the reason.
+
+```bash
+python scripts/upstream_review.py select --index /fresh/run/upstream/JOB_ID/review-index.json --record issue:123 --reason "The title identifies the current API and empty-reduction trigger." --output /fresh/run/upstream/JOB_ID/selection-123-v1.json
+```
+
+The queue's historical records[].selected flag only means the detail-request
+budget scheduled that record; the list labels it detail_scheduled. It grants no
+reading selection. Unscheduled search hits still appear in the index, and their
+stored search bodies can be explicitly selected without new network requests.
+
+3. List the needed section's item metadata, then read one returned item ID. Sections
+   are metadata, body, comments, files, patch and timeline. Body labels distinguish
+   search-result text from detail text; prefer the retrieved detail when available.
+   Comments include author/association metadata. Files list patch availability;
+   timeline items expose event/link metadata without expanding a linked issue body.
+   Select a linked record separately before reading its content.
+
+```bash
+python scripts/upstream_review.py items --selection /fresh/run/upstream/JOB_ID/selection-123-v1.json --section body
+python scripts/upstream_review.py read --selection /fresh/run/upstream/JOB_ID/selection-123-v1.json --item ITEM_ID --offset 0 --limit 2000
+```
+
+Read returns one exact text range (2000 Unicode characters by default, at most 4000),
+the full field length, next_offset, complete_item, source hash and JSON pointer.
+Metadata items are a declared projection serialized as JSON, not a verbatim entire
+response. Follow next_offset and inspect nearby context as needed; short output is
+not permission to ignore material evidence. Unavailable bodies/patches yield no
+items; raw retrieval gaps remain visible. A stored patch may itself be truncated
+by GitHub, even if complete_item is true. That flag describes only this one item.
+
+The reader refuses items outside the selected record and checks the index against
+the frozen snapshot and hashed artifacts. Changed snapshots/indexes require a new
+index and selection revision; preserve earlier files. For a historical export that
+lacks an index, generate one offline without modifying retrieval.json or raw files:
+
+```bash
+python scripts/upstream_review.py index --snapshot /existing/export/retrieval.json --output /existing/export/review-index-v1.json
+```
+
+Do not replace these steps with a custom loop that prints every search result body,
+all comments, patches, or full raw HTML. Complete raw evidence stays on disk; the
+ordinary model-reading path is metadata first, explicit selection, then needed
+items/ranges. This is a workflow constraint, not OS read protection or a guarantee
+about platform safeguards. Do not redact relevant defect mechanisms to fit a view.
+
+Compare trigger_comparison and claim_comparison from the inspected evidence, and
+fill upstream relation, coverage and PR state/fix/release evidence under
+[pack-contract.md](pack-contract.md). Title matches, filtered-out records and unread
+ranges do not establish duplicates, absence of prior reports, or complete coverage.
+Retrieval success never assigns same_issue, no_match_in_scope or a report action
+automatically. A merged/closed PR is not proof of effective coverage or release inclusion.
 
 Once an inspected match suffices, cancel remaining broad work and export what was
 already collected:

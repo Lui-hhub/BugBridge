@@ -101,9 +101,17 @@ answers. Pending interaction permits an incomplete local draft, never completion
    reproductions, template preparation and factual prose while retrieval is pending.
    Use upstream_queue.py with a stable shared queue state; see
    [retrieval-queue.md](references/retrieval-queue.md). Enqueue each eligible claim,
-   ensure the detached worker is running, export its evidence and inspect the actual
-   bodies/patches. Retrieval does not make semantic duplicate/fix decisions or update
-   reports. Cancel remaining work once an inspected match suffices; preserve gaps.
+   ensure the detached worker is running, and export its complete evidence. Use
+   upstream_review.py to list the metadata-only review index first. Select relevant
+   record IDs with concrete reasons tied to the current claim, then list and read
+   individual body/comment/patch items in bounded ranges. Follow ranges as needed
+   to establish context; relevant memory/boundary findings remain accurate and intact.
+   Do not bulk-print all search bodies or concatenate comments/patches into context.
+   The queue's selected flag is a detail-request budget, not a relevance decision.
+   Preserve raw snapshots; see [retrieval-queue.md](references/retrieval-queue.md) for
+   indexing historical exports offline. Retrieval does not make semantic duplicate/fix
+   decisions or update reports. Cancel remaining work once an inspected match suffices;
+   preserve gaps. A filtered title list or a short excerpt cannot establish no match.
    For GitHub, prefer an existing personal access token and follow the linked official
    request practices for serial requests, caching, rate limits and bounded retries.
    Missing/invalid credentials require an active operator notice, not silent anonymous
