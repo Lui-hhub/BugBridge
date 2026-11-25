@@ -23,6 +23,13 @@ copy content are held back; exclusions and held records remain under /records.
 Personal confirmations/attachments are completed on the official form, not a second
 local form. A concise operator_note can identify the actual remaining author step.
 
+When no issue template applies, a reasoned, evidence-bound `verified_editor` generic
+model can deliver Title and Issue body through this same view. Its official link
+opens the verified repository's ordinary `/issues/new` editor directly, without a
+template selector parameter. Unverified generic drafts remain held. Discovery
+evidence, source status and reporting-policy tasks stay in investigation records;
+see [template-fields.md](template-fields.md).
+
 Use an existing interpreter with the YAML parser needed to recheck YAML snapshots.
 --allow-pending permits an explicitly incomplete service during actual pending
 questions; it does not authorize skipping environment interaction. Startup prints
@@ -68,7 +75,7 @@ frozen evidence and does not modify original materials.
 - Title plus each nonempty official text field, in source order, each with Copy.
 - Native GitHub dropdowns appear as prepared fixed values with a short instruction
   to select that value on GitHub. No local dropdown or confirmation duplicates.
-- Markdown templates give Title and one complete body; existing-issue comments give
+- Markdown templates and verified ordinary editors give Title and one complete body; existing-issue comments give
   one comment. No extra combined-body action for native multi-field forms.
 - Render prose/code for reading, but copy the exact canonical payload. Field labels
   identify the destination. Optional empty fields and template instruction text do

@@ -6,6 +6,8 @@ import json
 from pathlib import Path
 import re
 
+from editor_route import verified_editor
+
 
 def normalize(data, fmt, template_id, name=None):
     if fmt == 'github_form':
@@ -46,7 +48,8 @@ def normalize(data, fmt, template_id, name=None):
             body = body[match.end():]
     return dict(id=template_id, name=name or template_id, format=fmt, metadata=meta,
                 fields=[dict(id='body', source_id=None, type='textarea', label='Issue body',
-                             description='Fill the original Markdown template, preserving its sections.',
+                             description=('Write the complete issue body in the ordinary GitHub editor.' if fmt == 'generic'
+                                          else 'Fill the original Markdown template, preserving its sections.'),
                              purpose='body', required=True, validations={'required':True}, default=body)])
 
 
@@ -61,11 +64,19 @@ def main():
     parser.add_argument('--revision', default='')
     parser.add_argument('--retrieved-at', default='')
     parser.add_argument('--official', action='store_true')
+    parser.add_argument('--verified-editor', action='store_true',
+                        help='Record an agent-verified ordinary GitHub editor after no-template discovery; not an official template')
+    parser.add_argument('--editor-evidence', type=Path, action='append', default=[])
+    parser.add_argument('--editor-reason', default='')
     parser.add_argument('--purpose-map', type=Path)
     parser.add_argument('--artifact-root', type=Path, default=Path.cwd())
     args = parser.parse_args()
     if args.output.exists():
         parser.error('Refusing to overwrite normalized template')
+    if args.verified_editor and (args.official or args.format != 'generic'):
+        parser.error('--verified-editor requires --format generic and cannot be combined with --official')
+    if not args.verified_editor and (args.editor_evidence or args.editor_reason):
+        parser.error('Editor discovery evidence/reason requires --verified-editor')
     text = args.input.read_text(encoding='utf-8')
     if args.format == 'github_form':
         if args.input.suffix.lower() == '.json':
@@ -92,6 +103,22 @@ def main():
                             limitation='' if args.official else 'Source has not been verified as the official applicable template.')
     if args.official and (not args.url or not args.retrieved_at or args.format == 'generic'):
         parser.error('Official snapshots need URL, retrieval time and an actual official template format')
+    if args.verified_editor:
+        evidence = []
+        for path in args.editor_evidence:
+            try:
+                name = path.resolve().relative_to(args.artifact_root.resolve()).as_posix()
+                content = path.read_bytes()
+            except (ValueError, OSError):
+                parser.error('Editor evidence must be a readable frozen file under --artifact-root')
+            evidence.append(dict(path=name, sha256=hashlib.sha256(content).hexdigest()))
+        result['source'].update(status='verified_editor',
+            limitation='No applicable official issue template was found; this is the verified ordinary GitHub title/body editor, not a template snapshot.',
+            editor_discovery=dict(kind='github_blank_issue', reason=args.editor_reason, evidence=evidence))
+        try:
+            verified_editor(result)
+        except ValueError as exc:
+            parser.error(str(exc))
     if args.purpose_map:
         purposes = json.loads(args.purpose_map.read_text())
         for field in result['fields']:

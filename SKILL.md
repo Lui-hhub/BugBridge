@@ -80,6 +80,11 @@ answers. Pending interaction permits an incomplete local draft, never completion
    at explicit operator request. Known malformed files stay flagged; do not invent
    controls. Cached reporting policies are preferred; obtain missing policies as
    needed. Live issue/PR searches are separate from template caching.
+   If discovery establishes that no applicable template exists, preserve the
+   repository and inherited-default evidence and use the verified ordinary GitHub
+   Title/body editor described in template-fields.md. Record verified_editor,
+   not official, and do not cache the generic model as an official template.
+   Unverified generic drafts remain outside the main copy list.
 
 3. **Select forms and criteria.** Read [template-fields.md](references/template-fields.md).
    Route claims to the appropriate form without asking the human to repeat template

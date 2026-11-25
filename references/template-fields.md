@@ -26,6 +26,30 @@ Markdown templates have one canonical body. Fill it while preserving its heading
 and requirements. Derived section-copy views, if added, are not official fields.
 A no-template fallback has `format: generic` and explicit discovery limitations.
 
+## Repositories without an issue template
+
+After inspecting applicable repository template locations, chooser configuration
+and inherited organization defaults, an agent can record the ordinary GitHub
+editor as `source.status: verified_editor`. Preserve the complete discovery
+responses and a reason explaining why no applicable official template exists.
+This status verifies the title/body route; it does not claim an official template.
+An unresolved `unverified` generic draft stays outside the main copy list.
+
+Freeze an empty body-model file and the discovery evidence under the run root:
+
+```bash
+python scripts/normalize_template.py --input /fresh/run/tracker/body.txt --format generic --id ordinary --output /fresh/run/templates/ordinary.json --artifact-root /fresh/run --url https://github.com/OWNER/REPO/issues/new --retrieved-at ACTUAL_DISCOVERY_TIME --verified-editor --editor-evidence /fresh/run/tracker/repository-locations.json --editor-evidence /fresh/run/tracker/organization-defaults.json --editor-reason 'Explain the inspected locations and applicable absence.'
+```
+
+The command performs no discovery or network access. The agent must establish
+applicability before using it. Register each evidence reference in pack.sources.
+The validator checks their frozen hashes, independently rederives the single body
+field, and requires the canonical HTTPS `/issues/new` URL to match library.repository
+without a query or fragment. Title and Issue body use the normal filling/review
+workflow and fixed view. No project-specific fields or page are invented. Preserve
+reporting policies and manual author tasks separately; an ordinary editor does not
+waive them. Do not cache a synthetic model as an official template snapshot.
+
 ## Semantics
 
 Assign each non-instruction field a purpose using both label and description:

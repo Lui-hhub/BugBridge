@@ -14,6 +14,9 @@ Reuse cached applicable templates offline; see [template-cache.md](template-cach
 For a new template, preserve its official raw snapshot and use the normalizer/cache
 importer. Annotate field purposes from its own descriptions without changing parsed
 labels/types/order/options. Do not invent structure based on another library.
+If no applicable template exists, the evidence-bound verified ordinary editor in
+[template-fields.md](template-fields.md) supplies the generic Title/body model.
+It follows the same frozen contract, content review and compilation steps.
 
 Use [pack-contract.md](pack-contract.md) and assemble_pack.py for the investigation
 source pack: materials ledger, selected templates, dispositions, environment records,

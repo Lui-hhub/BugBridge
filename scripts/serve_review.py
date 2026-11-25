@@ -19,6 +19,7 @@ import uuid
 from pack_v2 import PLACEHOLDER
 from layout_guard import ensure_layout, SKILL_ROOT
 from review_pack import read_json, validate
+from editor_route import verified_route
 
 
 DEFAULT_TTL_SECONDS = 3 * 60 * 60
@@ -81,6 +82,8 @@ def official_url(pack, card):
         return card['action'].get('target_url', '')
     repository = pack['library']['repository'].rstrip('/')
     source = card.get('template_source', {})
+    if source.get('status') == 'verified_editor':
+        return source['url']
     filename = Path(urlparse(source.get('url', '')).path).name
     return repository + '/issues/new' + ('?template=' + quote(filename) if filename else '/choose')
 
@@ -124,8 +127,9 @@ def project(pack, report):
             label = '补充评论' if card['action']['type']=='existing_issue_comment' else field['label']
             fields.append(dict(id=field['id'], label=label, type=kind, text=text,
                                render=field.get('render'), purpose=field.get('purpose'), source_id=field.get('source_id'), multiple=field.get('multiple', False)))
-        if card['action']['type'] == 'new_issue' and card.get('template_source', {}).get('status') != 'official':
-            reasons.append('官方模板身份尚待核对')
+        route = dict(format=card.get('template_format'), source=card.get('template_source', {}))
+        if card['action']['type'] == 'new_issue' and not verified_route(route, pack['library']['repository']):
+            reasons.append('官方模板或普通编辑器入口尚待核对')
         if pack.get('workflow_status') == 'awaiting_environment' and card['reproduction']['status'] == 'awaiting_environment':
             reasons.append('等待操作者提供匹配环境')
         for problem in card['blockers']:

@@ -12,6 +12,7 @@ import shutil
 import tempfile
 from urllib.parse import urlparse
 from pack_v2 import enrich_cards, legacy_upstream, validate_v2
+from editor_route import verified_editor, verified_route
 
 KINDS = {'input', 'textarea', 'dropdown', 'checkboxes', 'upload', 'markdown'}
 PURPOSES = {'problem', 'reproducer', 'expected', 'observed', 'environment', 'documentation_fix',
@@ -140,7 +141,7 @@ def validate(pack, base, allow_pending=False, collect_artifacts=False):
         template_blockers[tid] = []
         if source.get('path'):
             snapshot = verify(source)
-            if snapshot and template.get('format') in {'github_form', 'markdown'}:
+            if snapshot and (template.get('format') in {'github_form', 'markdown'} or source.get('status') == 'verified_editor'):
                 try:
                     from normalize_template import normalize
                     raw = snapshot.read_text(encoding='utf-8')
@@ -158,7 +159,7 @@ def validate(pack, base, allow_pending=False, collect_artifacts=False):
                             'validations', 'options', 'multiple', 'default', 'default_index', 'placeholder', 'render', 'raw']
                     check([{k:f.get(k) for k in keys} for f in template.get('fields', [])] ==
                           [{k:f.get(k) for k in keys} for f in original_fields],
-                          str(tid) + ': field model differs from the preserved official snapshot')
+                          str(tid) + ': field model differs from the preserved source snapshot')
                 except ImportError:
                     warnings.append(str(tid) + ': existing YAML parser unavailable; template structure needs manual verification')
                     template_blockers[tid].append('模板结构尚未独立核对；请使用已有 YAML 解析环境')
@@ -169,6 +170,15 @@ def validate(pack, base, allow_pending=False, collect_artifacts=False):
             check(urlparse(source.get('url', '')).scheme in {'http', 'https'}, 'official source must have an HTTP(S) provenance URL')
         else:
             check(bool(source.get('limitation')), 'non-official/missing template needs an explicit limitation')
+        if source.get('status') == 'verified_editor':
+            try:
+                check(bool(pack.get('library', {}).get('repository')), 'verified editor requires library.repository')
+                verified_editor(template, pack.get('library', {}).get('repository'))
+                for ref in source['editor_discovery']['evidence']:
+                    check(ref['path'] in source_paths, 'verified-editor discovery evidence must be declared in sources')
+                    verify(ref)
+            except (ValueError, KeyError, TypeError) as exc:
+                errors.append(str(tid) + ': invalid verified editor: ' + str(exc))
         seen = set()
         for field in template.get('fields', []):
             fid = field.get('id')
@@ -322,8 +332,12 @@ def validate(pack, base, allow_pending=False, collect_artifacts=False):
                 misplaced = set(response.get('content_tags', [])) & {'environment_report', 'execution_log', 'reproducer', 'upstream_inventory'}
                 check(not misplaced and not DOC_DUMP.search(text), iid + ':' + fid + ' mixes evidence dumps into a documentation suggestion')
             fields.append(dict(field, text=text, has_value=present, value=value))
-        if form_required and template.get('source', {}).get('status') != 'official':
-            problems.append('模板并非已核验的官方快照')
+        try:
+            route_ok = verified_route(template, pack.get('library', {}).get('repository'))
+        except ValueError:
+            route_ok = False  # The invalid discovery record is reported above.
+        if form_required and not route_ok:
+            problems.append('尚未核实官方模板或普通编辑器入口')
         criterion_data = None
         if modern and reproduction.get('criterion_ref'):
             criterion_path = verify(reproduction['criterion_ref'])
@@ -332,6 +346,7 @@ def validate(pack, base, allow_pending=False, collect_artifacts=False):
         blockers[iid] = problems
         cards.append(dict(id=iid, title=issue['title'], kind=issue.get('kind', 'other'),
                           template_id=template['id'], template_name=template.get('name', template['id']),
+                          template_format=template.get('format'),
                           template_source=template.get('source', {}), finding=finding, reproduction=reproduction,
                           upstream=upstream, fields=fields, body=body_text(template, fields), blockers=problems,
                           runs=runs, criterion_data=criterion_data))

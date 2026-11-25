@@ -49,8 +49,20 @@ that all claims within them were enumerated; the agent must inspect and enumerat
 
 `normalize_template.py` produces `{id,name,format,source,fields,...}`. Source has the
 raw snapshot reference, URL, revision when available, retrieval date and status:
-official or unverified. Official means identity and applicability were verified.
+official, unverified or verified_editor. Official means a template's identity and applicability were verified.
 A non-official/generic source needs an explicit limitation; never fabricate provenance.
+
+`verified_editor` is reserved for `format: generic` after reasoned discovery finds
+no applicable issue template. Its source URL is the canonical
+`https://github.com/OWNER/REPO/issues/new` matching library.repository, without query
+or fragment. Source also requires the frozen body-model reference, retrieval date,
+limitation and `editor_discovery: {kind: "github_blank_issue", reason, evidence}`.
+Evidence is a nonempty list of frozen `{path,sha256}` references declared in sources.
+The validator checks those artifacts and the normalized single body field; compile
+preserves them in the self-contained pack. The agent establishes semantic absence
+and applicability from complete discovery responses. This status does not describe
+an official template. Unverified generic models remain held; labeling a generic
+model official does not make it an eligible template route. See template-fields.md.
 
 Assign each non-markdown field a purpose from its actual label and description:
 problem, reproducer, expected, observed, environment, documentation_fix, attestation,
