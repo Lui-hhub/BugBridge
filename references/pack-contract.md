@@ -95,8 +95,13 @@ must resolve to a retained group without cycles.
 - needs_evidence/no_submission: dedicated evidence/disposition cards; no template
   or fake responses required. Excluded/merged records use no_submission.
 
-A known same_issue cannot use new_issue. Pending comment content is a visible form
-blocker, not invalid evidence. Never silently turn an existing report into novelty.
+A known same_issue cannot use new_issue for a fresh draft. An explicit operator
+request to retain an existing copy payload may use publication.retained_copy with
+requested_by_operator=true, a reason and an original_pack artifact referencing its
+reviewed compiled pack. The title, template and every field value must be unchanged.
+This preserves historical copy fields and keys; it is not a new submission or a
+submission-tracking status. Pending comment content is a visible form blocker, not
+invalid evidence. Never silently turn an existing report into novelty.
 
 ## Reproduction, criteria and assessments
 

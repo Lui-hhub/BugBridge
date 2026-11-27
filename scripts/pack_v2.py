@@ -89,7 +89,7 @@ def validate_v2(pack, base, verify, check, read_json, safe_id):
                   iid + ': merge destination must resolve to a retained group')
         validate_reproduction(iid, issue, base, verify, check, read_json, safe_id)
         validate_upstream(iid, issue, pack, verify, check)
-        validate_submission(iid, issue, verify, check, safe_id)
+        validate_submission(iid, issue, verify, check, safe_id, read_json, pack)
 
 
 def validate_reproduction(iid, issue, base, verify, check, read_json, safe_id):
@@ -232,7 +232,7 @@ def validate_upstream(iid, issue, pack, verify, check):
                 check(bool(release.get('version') and release.get('evidence')), iid + ': release inclusion needs version and evidence')
 
 
-def validate_submission(iid, issue, verify, check, safe_id):
+def validate_submission(iid, issue, verify, check, safe_id, read_json, pack):
     action = issue.get('action', {})
     kind = action.get('type')
     check(kind in ACTIONS and bool(action.get('reason')), iid + ': explicit next action/reason missing')
@@ -241,8 +241,38 @@ def validate_submission(iid, issue, verify, check, safe_id):
         check(kind == 'no_submission', iid + ': excluded/merged record must use no_submission')
     if finding == 'deferred':
         check(kind in {'needs_evidence', 'no_submission'}, iid + ': deferred record cannot be a new report')
+    retained = issue.get('publication', {}).get('retained_copy')
+    if retained is not None:
+        check(kind == 'new_issue', iid + ': retained copy requires original issue fields')
+        check(isinstance(retained, dict), iid + ': retained copy must cite its original compiled draft')
+        if isinstance(retained, dict):
+            check(retained.get('requested_by_operator') is True and bool(retained.get('reason')),
+                  iid + ': retaining a known draft requires an explicit operator request and reason')
+            original_path = verify(retained.get('original_pack', {}))
+            original = read_json(original_path) if original_path else {}
+            check(original.get('schema_version') == '2.0' and bool(original.get('form_binding')),
+                  iid + ': retained copy must reference a previously compiled pack')
+            check(original.get('materials_path') == pack.get('materials_path') and
+                  original.get('library', {}).get('repository') == pack.get('library', {}).get('repository'),
+                  iid + ': retained copy changed the original material/project scope')
+            previous = next((x for x in original.get('issues', []) if x.get('id') == iid), {})
+            template = lambda data: next((x for x in data.get('templates', []) if x.get('id') == previous.get('template_id')), {})
+            old_template, current_template = template(original), template(pack)
+            check(old_template.get('fields') == current_template.get('fields') and
+                  old_template.get('format') == current_template.get('format') and
+                  old_template.get('source', {}).get('url') == current_template.get('source', {}).get('url'),
+                  iid + ': retained copy changed the original form destination')
+            check(previous.get('action', {}).get('type') == 'new_issue',
+                  iid + ': retained copy must preserve the original field destination')
+            check(previous.get('publication', {}).get('quality_review', {}).get('status') == 'reviewed',
+                  iid + ': retained original draft must have a completed content review')
+            check(issue.get('title') == previous.get('title') and issue.get('template_id') == previous.get('template_id'),
+                  iid + ': retained copy changed the original title or template')
+            values = lambda item: {key: value.get('value') for key, value in item.get('responses', {}).items()}
+            check(values(issue) == values(previous), iid + ': retained copy changed the original field values')
     if issue.get('upstream', {}).get('relation') == 'same_issue':
-        check(kind != 'new_issue', iid + ': known same issue must not create another new-issue draft')
+        check(kind != 'new_issue' or retained is not None,
+              iid + ': known same issue must not create another new-issue draft')
     if kind == 'existing_issue_comment':
         target = action.get('target_url')
         check(any(m.get('url') == target and m.get('kind') == 'issue' for m in issue.get('upstream', {}).get('matches', [])),
