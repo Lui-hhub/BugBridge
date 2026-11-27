@@ -1,0 +1,95 @@
+{
+  "id": "6_others",
+  "name": "🧩 其他 Others",
+  "format": "github_form",
+  "description": "提出其他问题。 Report any other non-support related issues.",
+  "title_default": "",
+  "fields": [
+    {
+      "id": "element-1",
+      "source_id": null,
+      "source_index": 0,
+      "type": "markdown",
+      "label": "Template instructions",
+      "description": "",
+      "purpose": "instruction",
+      "required": false,
+      "validations": {},
+      "options": [],
+      "multiple": false,
+      "default": "#### 你可以在这里提出任何前面几类模板不适用的问题，包括但不限于：优化性建议、框架使用体验反馈、版本兼容性问题、报错信息不清楚等。\n#### You can report any issues that are not applicable to the previous types of templates, including but not limited to: enhancement suggestions, feedback on the use of the framework, version compatibility issues, unclear error information, etc.\n",
+      "default_index": null,
+      "placeholder": "",
+      "render": null,
+      "raw": {
+        "type": "markdown",
+        "attributes": {
+          "value": "#### 你可以在这里提出任何前面几类模板不适用的问题，包括但不限于：优化性建议、框架使用体验反馈、版本兼容性问题、报错信息不清楚等。\n#### You can report any issues that are not applicable to the previous types of templates, including but not limited to: enhancement suggestions, feedback on the use of the framework, version compatibility issues, unclear error information, etc.\n"
+        }
+      }
+    },
+    {
+      "id": "others",
+      "source_id": "others",
+      "source_index": 1,
+      "type": "textarea",
+      "label": "问题描述 Please describe your issue",
+      "description": "",
+      "purpose": "problem",
+      "required": true,
+      "validations": {
+        "required": true
+      },
+      "options": [],
+      "multiple": false,
+      "default": "",
+      "default_index": null,
+      "placeholder": "",
+      "render": null,
+      "raw": {
+        "type": "textarea",
+        "id": "others",
+        "attributes": {
+          "label": "问题描述 Please describe your issue"
+        },
+        "validations": {
+          "required": true
+        }
+      },
+      "purpose_reason": "Derived from this official field description, preserving exact labels and source order."
+    },
+    {
+      "id": "element-3",
+      "source_id": null,
+      "source_index": 2,
+      "type": "markdown",
+      "label": "Template instructions",
+      "description": "",
+      "purpose": "instruction",
+      "required": false,
+      "validations": {},
+      "options": [],
+      "multiple": false,
+      "default": "感谢你的贡献 🎉！ Thanks for your contribution 🎉!\n",
+      "default_index": null,
+      "placeholder": "",
+      "render": null,
+      "raw": {
+        "type": "markdown",
+        "attributes": {
+          "value": "感谢你的贡献 🎉！ Thanks for your contribution 🎉!\n"
+        }
+      }
+    }
+  ],
+  "source": {
+    "path": "paddlepaddle/bfc8e04dd7c835d89ad6fb7e39685fb185cac694/raw/6_others.yml",
+    "sha256": "37045bb58376df8a5c0ee556a5ba9198941ff9ebcb476fa211d67a0f83732524",
+    "url": "https://github.com/PaddlePaddle/Paddle/blob/bfc8e04dd7c835d89ad6fb7e39685fb185cac694/.github/ISSUE_TEMPLATE/6_others.yml",
+    "revision": "bfc8e04dd7c835d89ad6fb7e39685fb185cac694",
+    "retrieved_at": "2026-11-25T08:09:09.160610+00:00",
+    "status": "official",
+    "limitation": ""
+  },
+  "cache_notes": ""
+}

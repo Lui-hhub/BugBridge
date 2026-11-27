@@ -1,0 +1,128 @@
+{
+  "id": "1_bug-report",
+  "name": "🐛 报BUG Bug Report",
+  "format": "github_form",
+  "description": "报告一个可复现的BUG帮助我们修复框架。 Report a bug to help us reproduce and fix it.",
+  "title_default": "",
+  "fields": [
+    {
+      "id": "element-1",
+      "source_id": null,
+      "source_index": 0,
+      "type": "markdown",
+      "label": "Template instructions",
+      "description": "",
+      "purpose": "instruction",
+      "required": false,
+      "validations": {},
+      "options": [],
+      "multiple": false,
+      "default": "#### 在向Paddle报bug之前，请先查询[历史issue](https://github.com/PaddlePaddle/Paddle/issues)是否报过同样的bug。\n#### Before submitting a bug, please make sure the issue hasn't been already addressed by searching through [the existing and past issues](https://github.com/PaddlePaddle/Paddle/issues).\n",
+      "default_index": null,
+      "placeholder": "",
+      "render": null,
+      "raw": {
+        "type": "markdown",
+        "attributes": {
+          "value": "#### 在向Paddle报bug之前，请先查询[历史issue](https://github.com/PaddlePaddle/Paddle/issues)是否报过同样的bug。\n#### Before submitting a bug, please make sure the issue hasn't been already addressed by searching through [the existing and past issues](https://github.com/PaddlePaddle/Paddle/issues).\n"
+        }
+      }
+    },
+    {
+      "id": "code",
+      "source_id": "code",
+      "source_index": 1,
+      "type": "textarea",
+      "label": "bug描述 Describe the Bug",
+      "description": "请清晰简洁的描述这个bug，最好附上bug复现环境、bug复现步骤及最小代码集，以便我们可以通过运行代码来重现错误。代码片段需要尽可能简洁，请花些时间去掉不相关的代码以帮助我们有效地调试。我们希望通过复制代码并运行得到与你相同的结果，请避免任何外部数据或包含相关的导入等。例如：\n```python\n# 导入所有必要的库。 All necessary imports at the beginning.\n# paddlepaddle <= 2.1.2\nimport paddle\n\n# 一个简洁的片段，能够定位到bug。 A succinct reproducing example trimmed down to the essential parts.\na = paddle.rand(shape=[1,4])\nb = paddle.rand(shape=[1,4])\na.stop_gradient = False\nb.stop_gradient = False\n\nc = paddle.zeros((4, 4))\nc[0, :] = a/b\n\nprint('Is c requires grad: ', not c.stop_gradient) # 注意：这里出现了bug，期望requires_grad=True\n```\n如果代码太长，请将可执行代码放到[AIStudio](https://aistudio.baidu.com/aistudio/index)中并将项目设置为公开（或者放到github gist上），请在项目中描述清楚bug复现步骤，在issue中描述期望结果与实际结果。\n如果你报告的是一个报错信息，请将完整回溯的报错贴在这里，并使用 ` ```三引号块``` `展示错误信息。\n",
+      "purpose": "problem",
+      "required": true,
+      "validations": {
+        "required": true
+      },
+      "options": [],
+      "multiple": false,
+      "default": "",
+      "default_index": null,
+      "placeholder": "请清晰简洁的描述这个bug。A clear and concise description of what the bug is.\n\n```python\n# 最小可复现代码。 Sample code to reproduce the problem.\n```\n\n```shell\n带有完整回溯的报错信息。 The error message you got, with the full traceback.\n```\n",
+      "render": null,
+      "raw": {
+        "type": "textarea",
+        "id": "code",
+        "attributes": {
+          "label": "bug描述 Describe the Bug",
+          "description": "请清晰简洁的描述这个bug，最好附上bug复现环境、bug复现步骤及最小代码集，以便我们可以通过运行代码来重现错误。代码片段需要尽可能简洁，请花些时间去掉不相关的代码以帮助我们有效地调试。我们希望通过复制代码并运行得到与你相同的结果，请避免任何外部数据或包含相关的导入等。例如：\n```python\n# 导入所有必要的库。 All necessary imports at the beginning.\n# paddlepaddle <= 2.1.2\nimport paddle\n\n# 一个简洁的片段，能够定位到bug。 A succinct reproducing example trimmed down to the essential parts.\na = paddle.rand(shape=[1,4])\nb = paddle.rand(shape=[1,4])\na.stop_gradient = False\nb.stop_gradient = False\n\nc = paddle.zeros((4, 4))\nc[0, :] = a/b\n\nprint('Is c requires grad: ', not c.stop_gradient) # 注意：这里出现了bug，期望requires_grad=True\n```\n如果代码太长，请将可执行代码放到[AIStudio](https://aistudio.baidu.com/aistudio/index)中并将项目设置为公开（或者放到github gist上），请在项目中描述清楚bug复现步骤，在issue中描述期望结果与实际结果。\n如果你报告的是一个报错信息，请将完整回溯的报错贴在这里，并使用 ` ```三引号块``` `展示错误信息。\n",
+          "placeholder": "请清晰简洁的描述这个bug。A clear and concise description of what the bug is.\n\n```python\n# 最小可复现代码。 Sample code to reproduce the problem.\n```\n\n```shell\n带有完整回溯的报错信息。 The error message you got, with the full traceback.\n```\n"
+        },
+        "validations": {
+          "required": true
+        }
+      },
+      "purpose_reason": "Derived from this official field description, preserving exact labels and source order."
+    },
+    {
+      "id": "others",
+      "source_id": "others",
+      "source_index": 2,
+      "type": "textarea",
+      "label": "其他补充信息 Additional Supplementary Information",
+      "description": "如果你还有其他需要补充的内容，请写在这里。\nIf you have anything else to add, please write it here.\n",
+      "purpose": "environment",
+      "required": false,
+      "validations": {
+        "required": false
+      },
+      "options": [],
+      "multiple": false,
+      "default": "",
+      "default_index": null,
+      "placeholder": "",
+      "render": null,
+      "raw": {
+        "type": "textarea",
+        "id": "others",
+        "attributes": {
+          "label": "其他补充信息 Additional Supplementary Information",
+          "description": "如果你还有其他需要补充的内容，请写在这里。\nIf you have anything else to add, please write it here.\n"
+        },
+        "validations": {
+          "required": false
+        }
+      },
+      "purpose_reason": "Derived from this official field description, preserving exact labels and source order."
+    },
+    {
+      "id": "element-4",
+      "source_id": null,
+      "source_index": 3,
+      "type": "markdown",
+      "label": "Template instructions",
+      "description": "",
+      "purpose": "instruction",
+      "required": false,
+      "validations": {},
+      "options": [],
+      "multiple": false,
+      "default": "感谢你的贡献 🎉！Thanks for your contribution 🎉!\n",
+      "default_index": null,
+      "placeholder": "",
+      "render": null,
+      "raw": {
+        "type": "markdown",
+        "attributes": {
+          "value": "感谢你的贡献 🎉！Thanks for your contribution 🎉!\n"
+        }
+      }
+    }
+  ],
+  "source": {
+    "path": "paddlepaddle/bfc8e04dd7c835d89ad6fb7e39685fb185cac694/raw/1_bug-report.yml",
+    "sha256": "eb755285e45618333458ea5073d5b26957e553011c945e75128254b801703a0c",
+    "url": "https://github.com/PaddlePaddle/Paddle/blob/bfc8e04dd7c835d89ad6fb7e39685fb185cac694/.github/ISSUE_TEMPLATE/1_bug-report.yml",
+    "revision": "bfc8e04dd7c835d89ad6fb7e39685fb185cac694",
+    "retrieved_at": "2026-11-25T08:09:09.160610+00:00",
+    "status": "official",
+    "limitation": ""
+  },
+  "cache_notes": ""
+}

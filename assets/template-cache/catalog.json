@@ -284,6 +284,119 @@
         "sha256": "012435fd0880e6cbacac3547fb977d8db2725d65c8fa61b8c085ccecd5dca602",
         "url": "https://github.com/tensorflow/tensorflow/blob/e1c0bc14c92913205413e1bd53e83648aec9b740/.github/ISSUE_TEMPLATE/config.yml"
       }
+    },
+    "paddlepaddle": {
+      "id": "paddlepaddle",
+      "repository": "https://github.com/PaddlePaddle/Paddle",
+      "revision": "bfc8e04dd7c835d89ad6fb7e39685fb185cac694",
+      "retrieved_at": "2026-11-25T08:09:09.160610+00:00",
+      "aliases": [
+        "paddle"
+      ],
+      "templates": [
+        {
+          "id": "1_bug-report",
+          "filename": "1_bug-report.yml",
+          "raw": {
+            "path": "paddlepaddle/bfc8e04dd7c835d89ad6fb7e39685fb185cac694/raw/1_bug-report.yml",
+            "sha256": "eb755285e45618333458ea5073d5b26957e553011c945e75128254b801703a0c"
+          },
+          "url": "https://github.com/PaddlePaddle/Paddle/blob/bfc8e04dd7c835d89ad6fb7e39685fb185cac694/.github/ISSUE_TEMPLATE/1_bug-report.yml",
+          "status": "usable",
+          "name": "🐛 报BUG Bug Report",
+          "format": "github_form",
+          "normalized": {
+            "path": "paddlepaddle/bfc8e04dd7c835d89ad6fb7e39685fb185cac694/normalized/1_bug-report.json",
+            "sha256": "7d593f10189d85a539be3a4120b431f16cf04e76e9215206ee14e562d0c69314"
+          },
+          "purposes_assigned": true
+        },
+        {
+          "id": "2_feature-request",
+          "filename": "2_feature-request.yml",
+          "raw": {
+            "path": "paddlepaddle/bfc8e04dd7c835d89ad6fb7e39685fb185cac694/raw/2_feature-request.yml",
+            "sha256": "bc39717dfdca382ba0e410db8543207eccdace58e7455e4cc35f8d34bec04e92"
+          },
+          "url": "https://github.com/PaddlePaddle/Paddle/blob/bfc8e04dd7c835d89ad6fb7e39685fb185cac694/.github/ISSUE_TEMPLATE/2_feature-request.yml",
+          "status": "usable",
+          "name": "🚀 新需求 Feature Request",
+          "format": "github_form",
+          "normalized": {
+            "path": "paddlepaddle/bfc8e04dd7c835d89ad6fb7e39685fb185cac694/normalized/2_feature-request.json",
+            "sha256": "bac84eec6bb05e2a715903da17a70d879fb4aed02686a5c7fa59a62da92d2cfd"
+          },
+          "purposes_assigned": true
+        },
+        {
+          "id": "3_build-installation-issue",
+          "filename": "3_build-installation-issue.yml",
+          "raw": {
+            "path": "paddlepaddle/bfc8e04dd7c835d89ad6fb7e39685fb185cac694/raw/3_build-installation-issue.yml",
+            "sha256": "d71f905045a7a7e3a20a23cb0ed1b38c93c63549806ecce9433772483bf1e1fe"
+          },
+          "url": "https://github.com/PaddlePaddle/Paddle/blob/bfc8e04dd7c835d89ad6fb7e39685fb185cac694/.github/ISSUE_TEMPLATE/3_build-installation-issue.yml",
+          "status": "usable",
+          "name": "🗂 安装 Build/Installation Issue",
+          "format": "github_form",
+          "normalized": {
+            "path": "paddlepaddle/bfc8e04dd7c835d89ad6fb7e39685fb185cac694/normalized/3_build-installation-issue.json",
+            "sha256": "a1519bd061c3213a2cbeb392e53a65968185beb61c4c2f041e1df35a97d81059"
+          },
+          "purposes_assigned": true
+        },
+        {
+          "id": "4_documentation-issue",
+          "filename": "4_documentation-issue.yml",
+          "raw": {
+            "path": "paddlepaddle/bfc8e04dd7c835d89ad6fb7e39685fb185cac694/raw/4_documentation-issue.yml",
+            "sha256": "eee1df0b3a3c0225a6a04a85209e2a9b7a587558f4c4228ca135937698945588"
+          },
+          "url": "https://github.com/PaddlePaddle/Paddle/blob/bfc8e04dd7c835d89ad6fb7e39685fb185cac694/.github/ISSUE_TEMPLATE/4_documentation-issue.yml",
+          "status": "usable",
+          "name": "📚 文档 Documentation Issue",
+          "format": "github_form",
+          "normalized": {
+            "path": "paddlepaddle/bfc8e04dd7c835d89ad6fb7e39685fb185cac694/normalized/4_documentation-issue.json",
+            "sha256": "152fb3aeec430086d11716ab683aa06b0f09f9a29c8816bfbe94b6e221c8dafa"
+          },
+          "purposes_assigned": true
+        },
+        {
+          "id": "5_ask-a-question",
+          "filename": "5_ask-a-question.yml",
+          "raw": {
+            "path": "paddlepaddle/bfc8e04dd7c835d89ad6fb7e39685fb185cac694/raw/5_ask-a-question.yml",
+            "sha256": "b7c45ee239cc6fe95d3a7155d467e26f79ea3efbc8096e7b885aef29f96c39ed"
+          },
+          "url": "https://github.com/PaddlePaddle/Paddle/blob/bfc8e04dd7c835d89ad6fb7e39685fb185cac694/.github/ISSUE_TEMPLATE/5_ask-a-question.yml",
+          "status": "usable",
+          "name": "🙋🏼‍♀️🙋🏻‍♂️提问 Ask a Question",
+          "format": "github_form",
+          "normalized": {
+            "path": "paddlepaddle/bfc8e04dd7c835d89ad6fb7e39685fb185cac694/normalized/5_ask-a-question.json",
+            "sha256": "439f2e58f6ea2092eab53211e33373c3f4cae44c5c3e555671ca007435500090"
+          },
+          "purposes_assigned": true
+        },
+        {
+          "id": "6_others",
+          "filename": "6_others.yml",
+          "raw": {
+            "path": "paddlepaddle/bfc8e04dd7c835d89ad6fb7e39685fb185cac694/raw/6_others.yml",
+            "sha256": "37045bb58376df8a5c0ee556a5ba9198941ff9ebcb476fa211d67a0f83732524"
+          },
+          "url": "https://github.com/PaddlePaddle/Paddle/blob/bfc8e04dd7c835d89ad6fb7e39685fb185cac694/.github/ISSUE_TEMPLATE/6_others.yml",
+          "status": "usable",
+          "name": "🧩 其他 Others",
+          "format": "github_form",
+          "normalized": {
+            "path": "paddlepaddle/bfc8e04dd7c835d89ad6fb7e39685fb185cac694/normalized/6_others.json",
+            "sha256": "6a0dd81d7ece948d18f843bb65d99c66712dc24b5e9c53fec0bde16e3427daea"
+          },
+          "purposes_assigned": true
+        }
+      ]
     }
   }
 }

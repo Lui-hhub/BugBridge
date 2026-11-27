@@ -1,0 +1,72 @@
+{
+  "id": "5_ask-a-question",
+  "name": "🙋🏼‍♀️🙋🏻‍♂️提问 Ask a Question",
+  "format": "github_form",
+  "description": "提出一个使用/咨询问题。 Ask a usage or consultation question.",
+  "title_default": "",
+  "fields": [
+    {
+      "id": "element-1",
+      "source_id": null,
+      "source_index": 0,
+      "type": "markdown",
+      "label": "Template instructions",
+      "description": "",
+      "purpose": "instruction",
+      "required": false,
+      "validations": {},
+      "options": [],
+      "multiple": false,
+      "default": "#### 你可以在这里提出一个使用/咨询问题，提问之前请确保：\n- 1）已经百度/谷歌搜索过你的问题，但是没有找到解答；\n- 2）已经在官网查询过[API文档](https://www.paddlepaddle.org.cn/documentation/docs/zh/api/index_cn.html)与[FAQ](https://www.paddlepaddle.org.cn/documentation/docs/zh/faq/index_cn.html)，但是没有找到解答；\n- 3）已经在[历史issue](https://github.com/PaddlePaddle/Paddle/issues)中搜索过，没有找到同类issue或issue未被解答。\n\n#### You could ask a usage or consultation question here, before your start, please make sure:\n- 1) You have searched your question on Baidu/Google, but found no answer;\n- 2) You have checked the [API documentation](https://www.paddlepaddle.org.cn/documentation/docs/en/api/index_en.html), but found no answer;\n- 3) You have searched [the existing and past issues](https://github.com/PaddlePaddle/Paddle/issues), but found no similar issue or the issue has not been answered.\n",
+      "default_index": null,
+      "placeholder": "",
+      "render": null,
+      "raw": {
+        "type": "markdown",
+        "attributes": {
+          "value": "#### 你可以在这里提出一个使用/咨询问题，提问之前请确保：\n- 1）已经百度/谷歌搜索过你的问题，但是没有找到解答；\n- 2）已经在官网查询过[API文档](https://www.paddlepaddle.org.cn/documentation/docs/zh/api/index_cn.html)与[FAQ](https://www.paddlepaddle.org.cn/documentation/docs/zh/faq/index_cn.html)，但是没有找到解答；\n- 3）已经在[历史issue](https://github.com/PaddlePaddle/Paddle/issues)中搜索过，没有找到同类issue或issue未被解答。\n\n#### You could ask a usage or consultation question here, before your start, please make sure:\n- 1) You have searched your question on Baidu/Google, but found no answer;\n- 2) You have checked the [API documentation](https://www.paddlepaddle.org.cn/documentation/docs/en/api/index_en.html), but found no answer;\n- 3) You have searched [the existing and past issues](https://github.com/PaddlePaddle/Paddle/issues), but found no similar issue or the issue has not been answered.\n"
+        }
+      }
+    },
+    {
+      "id": "question",
+      "source_id": "question",
+      "source_index": 1,
+      "type": "textarea",
+      "label": "请提出你的问题 Please ask your question",
+      "description": "",
+      "purpose": "problem",
+      "required": true,
+      "validations": {
+        "required": true
+      },
+      "options": [],
+      "multiple": false,
+      "default": "",
+      "default_index": null,
+      "placeholder": "",
+      "render": null,
+      "raw": {
+        "type": "textarea",
+        "id": "question",
+        "attributes": {
+          "label": "请提出你的问题 Please ask your question"
+        },
+        "validations": {
+          "required": true
+        }
+      },
+      "purpose_reason": "Derived from this official field description, preserving exact labels and source order."
+    }
+  ],
+  "source": {
+    "path": "paddlepaddle/bfc8e04dd7c835d89ad6fb7e39685fb185cac694/raw/5_ask-a-question.yml",
+    "sha256": "b7c45ee239cc6fe95d3a7155d467e26f79ea3efbc8096e7b885aef29f96c39ed",
+    "url": "https://github.com/PaddlePaddle/Paddle/blob/bfc8e04dd7c835d89ad6fb7e39685fb185cac694/.github/ISSUE_TEMPLATE/5_ask-a-question.yml",
+    "revision": "bfc8e04dd7c835d89ad6fb7e39685fb185cac694",
+    "retrieved_at": "2026-11-25T08:09:09.160610+00:00",
+    "status": "official",
+    "limitation": ""
+  },
+  "cache_notes": ""
+}

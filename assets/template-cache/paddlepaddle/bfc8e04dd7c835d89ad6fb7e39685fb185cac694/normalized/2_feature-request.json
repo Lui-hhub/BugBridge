@@ -1,0 +1,128 @@
+{
+  "id": "2_feature-request",
+  "name": "🚀 新需求 Feature Request",
+  "format": "github_form",
+  "description": "提交一个你对Paddle的新需求。 Submit a request for a new Paddle feature.",
+  "title_default": "",
+  "fields": [
+    {
+      "id": "element-1",
+      "source_id": null,
+      "source_index": 0,
+      "type": "markdown",
+      "label": "Template instructions",
+      "description": "",
+      "purpose": "instruction",
+      "required": false,
+      "validations": {},
+      "options": [],
+      "multiple": false,
+      "default": "#### 你可以在这里提出你对Paddle框架的新需求，包括但不限于：功能或模型缺失、功能不全或无法使用、精度/性能不符合预期等。\n#### You could submit a request for a new Paddle feature here, including but not limited to: new features or models, incomplete or unusable features, accuracy/performance not as expected, etc.\n",
+      "default_index": null,
+      "placeholder": "",
+      "render": null,
+      "raw": {
+        "type": "markdown",
+        "attributes": {
+          "value": "#### 你可以在这里提出你对Paddle框架的新需求，包括但不限于：功能或模型缺失、功能不全或无法使用、精度/性能不符合预期等。\n#### You could submit a request for a new Paddle feature here, including but not limited to: new features or models, incomplete or unusable features, accuracy/performance not as expected, etc.\n"
+        }
+      }
+    },
+    {
+      "id": "description",
+      "source_id": "description",
+      "source_index": 1,
+      "type": "textarea",
+      "label": "需求描述 Feature Description",
+      "description": "请尽可能包含任务目标、需求场景、功能描述等信息，全面的信息有利于我们准确评估你的需求。\nPlease include as much information as possible, such as mission objectives, requirement scenarios, functional descriptions, etc. Comprehensive information will help us accurately assess your feature request.\n",
+      "purpose": "problem",
+      "required": true,
+      "validations": {
+        "required": true
+      },
+      "options": [],
+      "multiple": false,
+      "default": "任务目标（请描述你正在做的项目是什么，如模型、论文、项目是什么？）; <br /> 需求场景（请描述你的项目中为什么需要用此功能）;  <br /> 功能描述（请简单描述或设计这个功能）",
+      "default_index": null,
+      "placeholder": "",
+      "render": null,
+      "raw": {
+        "type": "textarea",
+        "id": "description",
+        "attributes": {
+          "label": "需求描述 Feature Description",
+          "description": "请尽可能包含任务目标、需求场景、功能描述等信息，全面的信息有利于我们准确评估你的需求。\nPlease include as much information as possible, such as mission objectives, requirement scenarios, functional descriptions, etc. Comprehensive information will help us accurately assess your feature request.\n",
+          "value": "任务目标（请描述你正在做的项目是什么，如模型、论文、项目是什么？）; <br /> 需求场景（请描述你的项目中为什么需要用此功能）;  <br /> 功能描述（请简单描述或设计这个功能）"
+        },
+        "validations": {
+          "required": true
+        }
+      },
+      "purpose_reason": "Derived from this official field description, preserving exact labels and source order."
+    },
+    {
+      "id": "alternatives",
+      "source_id": "alternatives",
+      "source_index": 2,
+      "type": "textarea",
+      "label": "替代实现 Alternatives",
+      "description": "如果你考虑过的任何替代解决方案或功能，请简要描述下，我们会综合评估。\nA description of any alternative solutions or features you've considered, if any.\n",
+      "purpose": "other",
+      "required": false,
+      "validations": {
+        "required": false
+      },
+      "options": [],
+      "multiple": false,
+      "default": "",
+      "default_index": null,
+      "placeholder": "",
+      "render": null,
+      "raw": {
+        "type": "textarea",
+        "id": "alternatives",
+        "attributes": {
+          "label": "替代实现 Alternatives",
+          "description": "如果你考虑过的任何替代解决方案或功能，请简要描述下，我们会综合评估。\nA description of any alternative solutions or features you've considered, if any.\n"
+        },
+        "validations": {
+          "required": false
+        }
+      },
+      "purpose_reason": "Derived from this official field description, preserving exact labels and source order."
+    },
+    {
+      "id": "element-4",
+      "source_id": null,
+      "source_index": 3,
+      "type": "markdown",
+      "label": "Template instructions",
+      "description": "",
+      "purpose": "instruction",
+      "required": false,
+      "validations": {},
+      "options": [],
+      "multiple": false,
+      "default": "感谢你的贡献 🎉！Thanks for your contribution 🎉!\n",
+      "default_index": null,
+      "placeholder": "",
+      "render": null,
+      "raw": {
+        "type": "markdown",
+        "attributes": {
+          "value": "感谢你的贡献 🎉！Thanks for your contribution 🎉!\n"
+        }
+      }
+    }
+  ],
+  "source": {
+    "path": "paddlepaddle/bfc8e04dd7c835d89ad6fb7e39685fb185cac694/raw/2_feature-request.yml",
+    "sha256": "bc39717dfdca382ba0e410db8543207eccdace58e7455e4cc35f8d34bec04e92",
+    "url": "https://github.com/PaddlePaddle/Paddle/blob/bfc8e04dd7c835d89ad6fb7e39685fb185cac694/.github/ISSUE_TEMPLATE/2_feature-request.yml",
+    "revision": "bfc8e04dd7c835d89ad6fb7e39685fb185cac694",
+    "retrieved_at": "2026-11-25T08:09:09.160610+00:00",
+    "status": "official",
+    "limitation": ""
+  },
+  "cache_notes": ""
+}

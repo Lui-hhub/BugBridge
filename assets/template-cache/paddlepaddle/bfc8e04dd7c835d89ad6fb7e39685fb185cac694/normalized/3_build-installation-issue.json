@@ -1,0 +1,128 @@
+{
+  "id": "3_build-installation-issue",
+  "name": "🗂 安装 Build/Installation Issue",
+  "format": "github_form",
+  "description": "报告一个安装问题。 Report an issue related to build or install Paddle.",
+  "title_default": "",
+  "fields": [
+    {
+      "id": "element-1",
+      "source_id": null,
+      "source_index": 0,
+      "type": "markdown",
+      "label": "Template instructions",
+      "description": "",
+      "purpose": "instruction",
+      "required": false,
+      "validations": {},
+      "options": [],
+      "multiple": false,
+      "default": "#### 安装请参考[官网文档](https://www.paddlepaddle.org.cn/install/quick?docurl=/documentation/docs/zh/develop/install/pip/linux-pip.html)，若未能解决你的问题，你可以在这里提issue。\n#### Before submitting a Build/Installation Issue, please make sure you have visited the [official website](https://www.paddlepaddle.org.cn/documentation/docs/en/install/index_en.html).\n",
+      "default_index": null,
+      "placeholder": "",
+      "render": null,
+      "raw": {
+        "type": "markdown",
+        "attributes": {
+          "value": "#### 安装请参考[官网文档](https://www.paddlepaddle.org.cn/install/quick?docurl=/documentation/docs/zh/develop/install/pip/linux-pip.html)，若未能解决你的问题，你可以在这里提issue。\n#### Before submitting a Build/Installation Issue, please make sure you have visited the [official website](https://www.paddlepaddle.org.cn/documentation/docs/en/install/index_en.html).\n"
+        }
+      }
+    },
+    {
+      "id": "error",
+      "source_id": "error",
+      "source_index": 1,
+      "type": "textarea",
+      "label": "问题描述 Issue Description",
+      "description": "请详细描述你的问题，同步贴出报错信息、日志/代码关键片段、复现步骤，以便我们快速排查问题。\nPlease describe your problem in detail, and synchronously post the error message, key log/code snippet, and reproduction steps, so that we can quickly troubleshoot the problem.\n",
+      "purpose": "problem",
+      "required": true,
+      "validations": {
+        "required": true
+      },
+      "options": [],
+      "multiple": false,
+      "default": "",
+      "default_index": null,
+      "placeholder": "",
+      "render": null,
+      "raw": {
+        "type": "textarea",
+        "id": "error",
+        "attributes": {
+          "label": "问题描述 Issue Description",
+          "description": "请详细描述你的问题，同步贴出报错信息、日志/代码关键片段、复现步骤，以便我们快速排查问题。\nPlease describe your problem in detail, and synchronously post the error message, key log/code snippet, and reproduction steps, so that we can quickly troubleshoot the problem.\n"
+        },
+        "validations": {
+          "required": true
+        }
+      },
+      "purpose_reason": "Derived from this official field description, preserving exact labels and source order."
+    },
+    {
+      "id": "environment",
+      "source_id": "environment",
+      "source_index": 2,
+      "type": "textarea",
+      "label": "版本&环境信息 Version & Environment Information",
+      "description": "请参考以下命令运行脚本[summary_env.py](https://github.com/PaddlePaddle/Paddle/blob/develop/tools/summary_env.py)获取版本&环境信息，并将输出拷贝在这里。\nPlease run the following and paste the output below.\n```shell\nwget https://raw.githubusercontent.com/PaddlePaddle/Paddle/develop/tools/summary_env.py\npython3 -m pip install distro\npython3 summary_env.py\n```\n若运行脚本出现问题，请在issue中说明，并提供以下信息：\n1. PaddlePaddle版本：请提供你的PaddlePaddle版本号（如2.0.0）或CommitID。\n2. CPU（可选）：请提供CPU型号，MKL/OpenBlas/MKLDNN/等数学库的使用情况，是否支持AVX指令集。\n3. GPU：请提供GPU型号，CUDA（如cuda10.2）和CUDNN版本号（如cudnn7.6.5）。\n4. 系统环境：请说明系统类型、版本（如Mac OS 10.14）。\n5. Python版本（如python 3.8）。\n6. （可选）若安装过程遇到问题，请提供安装方式（pip/conda/docker/源码编译）和相应的安装命令。\n7. （可选）若使用paddle过程中，遇到了无法使用gpu相关问题，请在命令行中键入`nvidia-smi`和`nvcc -V`，提供这两个命令输出的截图。\n8. （可选）若使用特殊硬件，请单独注明。\n",
+      "purpose": "environment",
+      "required": true,
+      "validations": {
+        "required": true
+      },
+      "options": [],
+      "multiple": false,
+      "default": "",
+      "default_index": null,
+      "placeholder": "****************************************\nPaddle version:\nPaddle With CUDA:\n\nOS:\nGCC version:\nClang version:\nCMake version:\nLibc version:\nPython version:\n\nCUDA version:\ncuDNN version:\nNvidia driver version:\nNvidia driver List:\n****************************************\n",
+      "render": null,
+      "raw": {
+        "type": "textarea",
+        "id": "environment",
+        "attributes": {
+          "label": "版本&环境信息 Version & Environment Information",
+          "description": "请参考以下命令运行脚本[summary_env.py](https://github.com/PaddlePaddle/Paddle/blob/develop/tools/summary_env.py)获取版本&环境信息，并将输出拷贝在这里。\nPlease run the following and paste the output below.\n```shell\nwget https://raw.githubusercontent.com/PaddlePaddle/Paddle/develop/tools/summary_env.py\npython3 -m pip install distro\npython3 summary_env.py\n```\n若运行脚本出现问题，请在issue中说明，并提供以下信息：\n1. PaddlePaddle版本：请提供你的PaddlePaddle版本号（如2.0.0）或CommitID。\n2. CPU（可选）：请提供CPU型号，MKL/OpenBlas/MKLDNN/等数学库的使用情况，是否支持AVX指令集。\n3. GPU：请提供GPU型号，CUDA（如cuda10.2）和CUDNN版本号（如cudnn7.6.5）。\n4. 系统环境：请说明系统类型、版本（如Mac OS 10.14）。\n5. Python版本（如python 3.8）。\n6. （可选）若安装过程遇到问题，请提供安装方式（pip/conda/docker/源码编译）和相应的安装命令。\n7. （可选）若使用paddle过程中，遇到了无法使用gpu相关问题，请在命令行中键入`nvidia-smi`和`nvcc -V`，提供这两个命令输出的截图。\n8. （可选）若使用特殊硬件，请单独注明。\n",
+          "placeholder": "****************************************\nPaddle version:\nPaddle With CUDA:\n\nOS:\nGCC version:\nClang version:\nCMake version:\nLibc version:\nPython version:\n\nCUDA version:\ncuDNN version:\nNvidia driver version:\nNvidia driver List:\n****************************************\n"
+        },
+        "validations": {
+          "required": true
+        }
+      },
+      "purpose_reason": "Derived from this official field description, preserving exact labels and source order."
+    },
+    {
+      "id": "element-4",
+      "source_id": null,
+      "source_index": 3,
+      "type": "markdown",
+      "label": "Template instructions",
+      "description": "",
+      "purpose": "instruction",
+      "required": false,
+      "validations": {},
+      "options": [],
+      "multiple": false,
+      "default": "感谢你的贡献 🎉！Thanks for your contribution 🎉!\n",
+      "default_index": null,
+      "placeholder": "",
+      "render": null,
+      "raw": {
+        "type": "markdown",
+        "attributes": {
+          "value": "感谢你的贡献 🎉！Thanks for your contribution 🎉!\n"
+        }
+      }
+    }
+  ],
+  "source": {
+    "path": "paddlepaddle/bfc8e04dd7c835d89ad6fb7e39685fb185cac694/raw/3_build-installation-issue.yml",
+    "sha256": "d71f905045a7a7e3a20a23cb0ed1b38c93c63549806ecce9433772483bf1e1fe",
+    "url": "https://github.com/PaddlePaddle/Paddle/blob/bfc8e04dd7c835d89ad6fb7e39685fb185cac694/.github/ISSUE_TEMPLATE/3_build-installation-issue.yml",
+    "revision": "bfc8e04dd7c835d89ad6fb7e39685fb185cac694",
+    "retrieved_at": "2026-11-25T08:09:09.160610+00:00",
+    "status": "official",
+    "limitation": ""
+  },
+  "cache_notes": ""
+}

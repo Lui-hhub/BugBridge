@@ -1,0 +1,127 @@
+{
+  "id": "4_documentation-issue",
+  "name": "📚 文档 Documentation Issue",
+  "format": "github_form",
+  "description": "反馈一个官网文档错误。 Report an issue related to https://www.paddlepaddle.org.cn/.",
+  "title_default": "",
+  "fields": [
+    {
+      "id": "element-1",
+      "source_id": null,
+      "source_index": 0,
+      "type": "markdown",
+      "label": "Template instructions",
+      "description": "",
+      "purpose": "instruction",
+      "required": false,
+      "validations": {},
+      "options": [],
+      "multiple": false,
+      "default": "#### 请确认反馈的问题来自PaddlePaddle官网文档：https://www.paddlepaddle.org.cn/ 。\n#### Before submitting a Documentation Issue, Please make sure that issue is related to https://www.paddlepaddle.org.cn/.\n",
+      "default_index": null,
+      "placeholder": "",
+      "render": null,
+      "raw": {
+        "type": "markdown",
+        "attributes": {
+          "value": "#### 请确认反馈的问题来自PaddlePaddle官网文档：https://www.paddlepaddle.org.cn/ 。\n#### Before submitting a Documentation Issue, Please make sure that issue is related to https://www.paddlepaddle.org.cn/.\n"
+        }
+      }
+    },
+    {
+      "id": "link",
+      "source_id": "link",
+      "source_index": 1,
+      "type": "textarea",
+      "label": "文档链接&描述 Document Links & Description",
+      "description": "请说明有问题的文档链接以及该文档存在的问题。\nPlease fill in the link to the document and describe the question.\n",
+      "purpose": "problem",
+      "required": true,
+      "validations": {
+        "required": true
+      },
+      "options": [],
+      "multiple": false,
+      "default": "",
+      "default_index": null,
+      "placeholder": "",
+      "render": null,
+      "raw": {
+        "type": "textarea",
+        "id": "link",
+        "attributes": {
+          "label": "文档链接&描述 Document Links & Description",
+          "description": "请说明有问题的文档链接以及该文档存在的问题。\nPlease fill in the link to the document and describe the question.\n"
+        },
+        "validations": {
+          "required": true
+        }
+      },
+      "purpose_reason": "Derived from this official field description, preserving exact labels and source order."
+    },
+    {
+      "id": "error",
+      "source_id": "error",
+      "source_index": 2,
+      "type": "textarea",
+      "label": "请提出你的建议 Please give your suggestion",
+      "description": "请告诉我们，你希望如何改进这个文档。或者你可以提个PR修复这个问题。[教程参考](https://github.com/PaddlePaddle/docs/wiki#%E8%B4%A1%E7%8C%AE%E6%96%87%E6%A1%A3)\nPlease tell us how you would like to improve this document. Or you can submit a PR to fix this problem.\n",
+      "purpose": "documentation_fix",
+      "required": false,
+      "validations": {
+        "required": false
+      },
+      "options": [],
+      "multiple": false,
+      "default": "",
+      "default_index": null,
+      "placeholder": "",
+      "render": null,
+      "raw": {
+        "type": "textarea",
+        "id": "error",
+        "attributes": {
+          "label": "请提出你的建议 Please give your suggestion",
+          "description": "请告诉我们，你希望如何改进这个文档。或者你可以提个PR修复这个问题。[教程参考](https://github.com/PaddlePaddle/docs/wiki#%E8%B4%A1%E7%8C%AE%E6%96%87%E6%A1%A3)\nPlease tell us how you would like to improve this document. Or you can submit a PR to fix this problem.\n"
+        },
+        "validations": {
+          "required": false
+        }
+      },
+      "purpose_reason": "Derived from this official field description, preserving exact labels and source order."
+    },
+    {
+      "id": "element-4",
+      "source_id": null,
+      "source_index": 3,
+      "type": "markdown",
+      "label": "Template instructions",
+      "description": "",
+      "purpose": "instruction",
+      "required": false,
+      "validations": {},
+      "options": [],
+      "multiple": false,
+      "default": "感谢你的贡献 🎉！Thanks for your contribution 🎉!\n",
+      "default_index": null,
+      "placeholder": "",
+      "render": null,
+      "raw": {
+        "type": "markdown",
+        "attributes": {
+          "value": "感谢你的贡献 🎉！Thanks for your contribution 🎉!\n"
+        }
+      }
+    }
+  ],
+  "source": {
+    "path": "paddlepaddle/bfc8e04dd7c835d89ad6fb7e39685fb185cac694/raw/4_documentation-issue.yml",
+    "sha256": "eee1df0b3a3c0225a6a04a85209e2a9b7a587558f4c4228ca135937698945588",
+    "url": "https://github.com/PaddlePaddle/Paddle/blob/bfc8e04dd7c835d89ad6fb7e39685fb185cac694/.github/ISSUE_TEMPLATE/4_documentation-issue.yml",
+    "revision": "bfc8e04dd7c835d89ad6fb7e39685fb185cac694",
+    "retrieved_at": "2026-11-25T08:09:09.160610+00:00",
+    "status": "official",
+    "limitation": ""
+  },
+  "cache_notes": ""
+}
